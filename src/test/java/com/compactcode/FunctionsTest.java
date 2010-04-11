@@ -1,8 +1,8 @@
 package com.compactcode;
 
-import static com.compactcode.FluentFunction.all;
 import static com.compactcode.FluentFunction.fluent;
 import static com.compactcode.FluentList.fluent;
+import static com.compactcode.Functions.all;
 import static com.compactcode.Functions.avg;
 import static com.compactcode.Functions.stringToInt;
 import static com.compactcode.Functions.sum;
