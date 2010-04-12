@@ -1,4 +1,4 @@
-<pre><code>package com.compactcode;
+package com.compactcode;
 
 import static com.compactcode.FluentFunction.fluent;
 import static com.compactcode.FluentList.fluent;
@@ -75,4 +75,4 @@ public class BasicTest {
 		assertEquals(expected, actual);
 	}
 	
-}</code></pre>
+}
