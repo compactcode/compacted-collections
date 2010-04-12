@@ -2,22 +2,51 @@ package com.compactcode;
 
 import static com.compactcode.FluentFunction.fluent;
 import static com.compactcode.FluentList.fluent;
-import static com.compactcode.Functions.all;
+import static com.compactcode.Functions.each;
 import static com.compactcode.Functions.avg;
+import static com.compactcode.Functions.propertyValue;
 import static com.compactcode.Functions.stringToInt;
 import static com.compactcode.Functions.sum;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import com.google.common.base.Function;
 import com.google.common.base.Functions;
 
 public class FunctionsTest {
 	
+	public class Customer {
+		private String name;
+		public Customer(String name) {
+			this.name = name;
+		}
+		public String getName() {
+			return name;
+		};
+	}
+	
 	@Test
 	public void canConvertStringsToIntegers() {
 		assertEquals(newArrayList(1, 2), fluent(newArrayList("1", "2")).map(stringToInt()));
+	}
+	
+	@Test
+	public void canMapObjectsToPropertyValues() {
+		Function<Customer, String> toName = propertyValue("name");
+		assertEquals(newArrayList("a", "b"), fluent(new Customer("a"), new Customer("b")).map(toName));
+	}
+	
+	@Test
+	public void cannotMapObjectsToPropertyValuesWhenPropertyNameIsIncorrect() {
+		try {
+			fluent(new Customer("1")).map(propertyValue("notAProperty"));
+			fail();
+		}catch (Exception e) {
+			assertEquals("java.lang.NoSuchFieldException: notAProperty", e.getMessage());
+		}
 	}
 	
 	@Test
@@ -33,7 +62,7 @@ public class FunctionsTest {
 	
 	@Test
 	public void canMapListsUsingMapAllFunction() {
-		assertEquals(newArrayList(1, 2), all(stringToInt()).apply(newArrayList("1", "2")));
+		assertEquals(newArrayList(1, 2), each(stringToInt()).apply(newArrayList("1", "2")));
 	}
 	
 	@Test

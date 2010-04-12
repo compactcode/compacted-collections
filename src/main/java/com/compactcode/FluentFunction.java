@@ -15,7 +15,7 @@ public class FluentFunction<A, B> implements Function<A, B>{
 		this.current = function;
 	}
 
-	public <C> FluentFunction<A, C> compose(Function<B, C> next) {
+	public <C> FluentFunction<A, C> compose(Function<? super B, C> next) {
 		return fluent(Functions.compose(next, current));
 	}
 
