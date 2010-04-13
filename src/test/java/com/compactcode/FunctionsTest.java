@@ -5,6 +5,7 @@ import static com.compactcode.FluentList.fluent;
 import static com.compactcode.Functions.each;
 import static com.compactcode.Functions.propertyValue;
 import static com.compactcode.Functions.stringToInt;
+import static com.compactcode.Functions.stringToLong;
 import static com.compactcode.Functions.sum;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
@@ -32,6 +33,11 @@ public class FunctionsTest {
 		assertEquals(newArrayList(1, 2), fluent(newArrayList("1", "2")).map(stringToInt()));
 	}
 	
+	@Test
+	public void canConvertStringsToLongs() {
+		assertEquals(newArrayList(1L, 2L), fluent(newArrayList("1", "2")).map(stringToLong()));
+	}
+
 	@Test
 	public void canMapObjectsToPropertyValues() {
 		Function<Customer, String> toName = propertyValue("name");

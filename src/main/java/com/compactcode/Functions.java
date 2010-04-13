@@ -35,6 +35,14 @@ public final class Functions {
 		};
 	}
 	
+	public static final Function<String, Long> stringToLong() {
+		return new Function<String, Long>() {
+			public Long apply(String value) {
+				return Long.valueOf(value);
+			}
+		};
+	}
+	
 	public static final Function<List<Integer>, Integer> sum() {
 		return new Function<List<Integer>, Integer>() {
 			public Integer apply(List<Integer> values) {
@@ -47,6 +55,9 @@ public final class Functions {
 		};
 	}
 	
+	/**
+	 * Allows a mapper to be used on a list of lists.
+	 */
 	public static final <T, O> Function<List<T>, FluentList<O>> each(final Function<T, O> mapper) {
 		return new Function<List<T>, FluentList<O>>() {
 			public FluentList<O> apply(List<T> source) {
