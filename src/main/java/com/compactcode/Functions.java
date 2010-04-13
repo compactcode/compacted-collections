@@ -1,6 +1,5 @@
 package com.compactcode;
 
-import static com.compactcode.FluentFunction.fluent;
 import static com.compactcode.FluentList.fluent;
 
 import java.lang.reflect.Field;
@@ -57,14 +56,6 @@ public final class Functions {
 		};
 	}
 	
-	public static final Function<List<Integer>, Integer> avg() {
-		return new Function<List<Integer>, Integer>() {
-			public Integer apply(List<Integer> values) {
-				return sum().apply(values) / values.size();
-			}
-		};
-	}
-	
 	public static final <T, O> Function<List<T>, FluentList<O>> each(final Function<T, O> mapper) {
 		return new Function<List<T>, FluentList<O>>() {
 			public FluentList<O> apply(List<T> source) {
@@ -73,8 +64,4 @@ public final class Functions {
 		};
 	}
 	
-	public static final <A, B, C, D> Function<A, D> expandMapReduce(Function<A, List<B>> expander, Function<B, C> mapper, Function<List<C>, D> reducer) {
-		return fluent(expander).compose(each(mapper)).compose(reducer);
-	}
-
 }

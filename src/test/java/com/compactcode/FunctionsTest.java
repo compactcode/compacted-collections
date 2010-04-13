@@ -3,7 +3,6 @@ package com.compactcode;
 import static com.compactcode.FluentFunction.fluent;
 import static com.compactcode.FluentList.fluent;
 import static com.compactcode.Functions.each;
-import static com.compactcode.Functions.avg;
 import static com.compactcode.Functions.propertyValue;
 import static com.compactcode.Functions.stringToInt;
 import static com.compactcode.Functions.sum;
@@ -52,12 +51,6 @@ public class FunctionsTest {
 	@Test
 	public void canSumIntegers() {
 		assertEquals(6, fluent(newArrayList(1, 2, 3)).reduce(sum()));
-	}
-	
-	@Test
-	public void canAverageIntegers() {
-		assertEquals(2, fluent(newArrayList(1, 2, 3)).reduce(avg()));
-		assertEquals(1, fluent(newArrayList(1, 2)).reduce(avg()));
 	}
 	
 	@Test

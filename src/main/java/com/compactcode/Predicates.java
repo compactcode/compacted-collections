@@ -14,7 +14,7 @@ public final class Predicates {
 		};
 	}
 	
-	public static final Predicate<Collection<?>> sizeGreaterThan(final int target) {
+	public static final Predicate<Collection<?>> sizeGreaterThan(int target) {
 		return com.google.common.base.Predicates.compose(greaterThan(target), Functions.collectionSize());
 	}
 	
