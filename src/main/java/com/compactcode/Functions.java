@@ -3,6 +3,7 @@ package com.compactcode;
 import static com.compactcode.FluentList.fluent;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -43,9 +44,9 @@ public final class Functions {
 		};
 	}
 	
-	public static final Function<List<Integer>, Integer> sum() {
-		return new Function<List<Integer>, Integer>() {
-			public Integer apply(List<Integer> values) {
+	public static final Function<Collection<Integer>, Integer> sum() {
+		return new Function<Collection<Integer>, Integer>() {
+			public Integer apply(Collection<Integer> values) {
 				int total = 0;
 				for (Integer value : values) {
 					total += value;
