@@ -11,6 +11,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
 public class FluentList<T> extends ForwardingList<T> {
+
+	public static <T> FluentList<T> fluent(List<T> delegate) {
+		return new FluentList<T>(delegate);
+	}
 	
 	public static <T> FluentList<T> fluent(Iterable<T> delegate) {
 		return new FluentList<T>(Lists.newArrayList(delegate));
@@ -27,17 +31,17 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 
 	/**
-	 * Convert each element of this list into another type.
+	 * Convert each element of this list into a new one.
 	 */
 	public <O> FluentList<O> transform(Function<? super T, O> mapper) {
-		return fluent(Iterables.transform(delegate, mapper));
+		return fluent(Lists.transform(delegate, mapper));
 	}
 	
 	/**
 	 * Synonym for transform.
 	 */
 	public <O> FluentList<O> map(Function<? super T, O> mapper) {
-		return fluent(Iterables.transform(delegate, mapper));
+		return transform(mapper);
 	}
 	
 	/**
@@ -147,6 +151,5 @@ public class FluentList<T> extends ForwardingList<T> {
 	protected List<T> delegate() {
 		return delegate;
 	}
-
 
 }

@@ -47,7 +47,7 @@ public class FunctionsTest {
 	@Test
 	public void cannotMapObjectsToPropertyValuesWhenPropertyNameIsIncorrect() {
 		try {
-			fluent(new Customer("1")).map(propertyValue("notAProperty"));
+			fluent(new Customer("1")).map(propertyValue("notAProperty")).hashCode();
 			fail();
 		}catch (Exception e) {
 			assertEquals("java.lang.NoSuchFieldException: notAProperty", e.getMessage());

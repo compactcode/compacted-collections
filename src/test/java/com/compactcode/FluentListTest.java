@@ -25,8 +25,33 @@ public class FluentListTest {
 	}
 	
 	@Test
-	public void canUseTransformAsASynonymToMap() {
+	public void canTransformElementsUsingMapper() {
 		assertEquals(newArrayList(1, 2), fluent("1", "2").transform(stringToInt()));
+	}
+	
+	@Test
+	public void canUseMapAsSynonymToTransform() {
+		assertEquals(newArrayList(1, 2), fluent("1", "2").map(stringToInt()));
+	}
+	
+	@Test
+	public void transformIsLazy() {
+		Function<String, String> throwException = new Function<String, String>() {
+			public String apply(String value) {
+				throw new RuntimeException("not lazy");
+			}
+		};
+		fluent("1", "2").transform(throwException);
+	}
+	
+	@Test
+	public void mapIsLazy() {
+		Function<String, String> throwException = new Function<String, String>() {
+			public String apply(String value) {
+				throw new RuntimeException("not lazy");
+			}
+		};
+		fluent("1", "2").map(throwException);
 	}
 	
 	@Test
