@@ -3,7 +3,6 @@ package com.compactcode;
 import static com.compactcode.FluentList.fluent;
 
 import java.lang.reflect.Field;
-import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -24,14 +23,6 @@ public final class Functions {
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
-			}
-		};
-	}
-	
-	public static final Function<Collection<?>, Integer> collectionSize() {
-		return new Function<Collection<?>, Integer>() {
-			public Integer apply(Collection<?> value) {
-				return value.size();
 			}
 		};
 	}

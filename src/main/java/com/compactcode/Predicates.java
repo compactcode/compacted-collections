@@ -1,7 +1,5 @@
 package com.compactcode;
 
-import java.util.Collection;
-
 import com.google.common.base.Predicate;
 
 public final class Predicates {
@@ -12,10 +10,6 @@ public final class Predicates {
 				return value > target;
 			}
 		};
-	}
-	
-	public static final Predicate<Collection<?>> sizeGreaterThan(int target) {
-		return com.google.common.base.Predicates.compose(greaterThan(target), Functions.collectionSize());
 	}
 	
 }
