@@ -44,6 +44,9 @@ public final class Functions {
 		};
 	}
 	
+	/**
+	 * Calculates the sum for a collection of integers.
+	 */
 	public static final Function<Collection<Integer>, Integer> sum() {
 		return new Function<Collection<Integer>, Integer>() {
 			public Integer apply(Collection<Integer> values) {

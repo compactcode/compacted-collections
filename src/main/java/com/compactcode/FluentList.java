@@ -1,5 +1,6 @@
 package com.compactcode;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -47,7 +48,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	/**
 	 * Convert this list into a single value.
 	 */
-	public <O> O reduce(Function<List<T>, O> reducer) {
+	public <O> O reduce(Function<Collection<T>, O> reducer) {
 		return reducer.apply(this);
 	}
 	
@@ -135,7 +136,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Return a copy of this list with reverse ordering.
 	 */
 	public FluentList<T> reverse() {
-		return sort(Ordering.explicit(this).reverse());
+		return fluent(Iterables.reverse(this));
 	}
 	
 	/**
@@ -146,6 +147,10 @@ public class FluentList<T> extends ForwardingList<T> {
 			return null;
 		}
 		return get(0);
+	}
+	
+	public FluentSet<T> toSet() {
+		return FluentSet.fluent(this);
 	}
 	
 	protected List<T> delegate() {
