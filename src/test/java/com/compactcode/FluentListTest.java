@@ -137,7 +137,27 @@ public class FluentListTest {
 				return newArrayList(source, source);
 			}
 		};
-		assertEquals(newArrayList(1, 1, 2, 2), fluent(newArrayList(1, 2)).expand(expander));
+		assertEquals(newArrayList(1, 1, 2, 2), fluent(1, 2).expand(expander));
+	}
+	
+	@Test
+	public void canGetTheFirstElementFromAList() {
+		assertEquals("a", fluent("a", "b").first());
+	}
+	
+	@Test
+	public void canGetTheFirstElementFromAnEmptyList() {
+		assertEquals(null, fluent().first());
+	}
+	
+	@Test
+	public void canGetTheLastElementFromAList() {
+		assertEquals("b", fluent("a", "b").last());
+	}
+	
+	@Test
+	public void canGetTheLastElementFromAnEmptyList() {
+		assertEquals(null, fluent().last());
 	}
 	
 }

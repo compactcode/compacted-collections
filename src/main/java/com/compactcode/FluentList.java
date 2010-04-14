@@ -99,7 +99,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Find the first matching element in this list, or return null.
 	 */
 	public T find(Predicate<? super T> predicate) {
-		return filter(predicate).head();
+		return filter(predicate).first();
 	}
 	
 	/**
@@ -142,11 +142,18 @@ public class FluentList<T> extends ForwardingList<T> {
 	/**
 	 * Find the first element in this list, or return null if no elements exist.
 	 */
-	public T head() {
+	public T first() {
 		if(size() == 0) {
 			return null;
 		}
 		return get(0);
+	}
+	
+	public T last() {
+		if(size() == 0) {
+			return null;
+		}
+		return get(size() - 1);
 	}
 	
 	public FluentSet<T> toSet() {
