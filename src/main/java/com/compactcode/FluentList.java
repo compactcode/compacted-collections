@@ -119,6 +119,13 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 	
 	/**
+	 * Return a sorted copy of this list using natural ordering.
+	 */
+	public <O> FluentList<T> sort(Function<T, ? extends Comparable<O>> mapper) {
+		return sort(mapper, Ordering.natural());
+	}
+	
+	/**
 	 * Return a sorted copy of this list using the given ordering.
 	 */
 	public FluentList<T> sort(Ordering<? super T> order) {
@@ -149,6 +156,9 @@ public class FluentList<T> extends ForwardingList<T> {
 		return get(0);
 	}
 	
+	/**
+	 * Find the last element in this list, or return null if no elements exist.
+	 */
 	public T last() {
 		if(size() == 0) {
 			return null;

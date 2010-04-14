@@ -22,6 +22,5 @@ public class FluentFunction<A, B> implements Function<A, B>{
 	public B apply(A input) {
 		return current.apply(input);
 	}
-
 	
 }

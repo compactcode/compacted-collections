@@ -57,42 +57,42 @@ public class FluentListTest {
 	
 	@Test
 	public void canCompareFluentToNonFluentListUsingToString() {
-		assertEquals(newArrayList("a", "b").toString(), fluent(newArrayList("a", "b")).toString());
+		assertEquals(newArrayList("a", "b").toString(), fluent("a", "b").toString());
 	}
 	
 	@Test
 	public void canCompareFluentToNonFluentListUsingEquals() {
-		assertEquals(newArrayList("a", "b"), fluent(newArrayList("a", "b")));
+		assertEquals(newArrayList("a", "b"), fluent("a", "b"));
 	}
 	
 	@Test
 	public void canSumListUsingReduce() {
-		assertEquals(3, fluent(newArrayList(1, 2)).reduce(sum()));
+		assertEquals(3, fluent(1, 2).reduce(sum()));
 	}
 	
 	@Test
 	public void canFilterUsingPredicate() {
-		assertEquals(newArrayList("b", "c"), fluent(newArrayList("a", "b", "c")).filter(in(newArrayList("b", "c"))));
+		assertEquals(newArrayList("b", "c"), fluent("a", "b", "c").filter(in(newArrayList("b", "c"))));
 	}
 	
 	@Test
 	public void canFilterListUsingNegatedPredicate() {
-		assertEquals(newArrayList("a", "c"), fluent(newArrayList("a", "b", "c")).filterNot(equalTo("b")));
+		assertEquals(newArrayList("a", "c"), fluent("a", "b", "c").filterNot(equalTo("b")));
 	}
 	
 	@Test
 	public void canFilterMatchingElementUsingPredicateAndFunction() {
-		assertEquals(newArrayList(2), fluent(newArrayList(1, 2)).filter(toStringFunction(), equalTo("2")));
+		assertEquals(newArrayList(2), fluent(1, 2).filter(toStringFunction(), equalTo("2")));
 	}
 	
 	@Test
 	public void canFilterMatchingElementUsingNegatedPredicateAndFunction() {
-		assertEquals(newArrayList(1), fluent(newArrayList(1, 2)).filterNot(toStringFunction(), equalTo("2")));
+		assertEquals(newArrayList(1), fluent(1, 2).filterNot(toStringFunction(), equalTo("2")));
 	}
 	
 	@Test
 	public void canFindFirstMatchingElementUsingPredicate() {
-		assertEquals("b", fluent(newArrayList("a", "b", "b")).find(equalTo("b")));
+		assertEquals("b", fluent("a", "b", "b").find(equalTo("b")));
 	}
 	
 	@Test
@@ -112,12 +112,17 @@ public class FluentListTest {
 	
 	@Test
 	public void canSortListUsingGivenOrdering() {
-		assertEquals(newArrayList("a", "b", "c"), fluent(newArrayList("c", "a", "b")).sort(natural()));
+		assertEquals(newArrayList("a", "b", "c"), fluent("c", "a", "b").sort(natural()));
 	}
 
 	@Test
 	public void canSortListUsingGivenOrderingAndFunction() {
-		assertEquals(newArrayList("11", "12", "21"), fluent(newArrayList("21", "12", "11")).sort(stringToInt(), natural()));
+		assertEquals(newArrayList("11", "12", "21"), fluent("21", "12", "11").sort(stringToInt(), natural()));
+	}
+	
+	@Test
+	public void canSortListNaturalOrderingAndToComparableFunction() {
+		assertEquals(newArrayList("11", "12", "21"), fluent("21", "12", "11").sort(stringToInt()));
 	}
 	
 	@Test
