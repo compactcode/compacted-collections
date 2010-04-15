@@ -8,7 +8,6 @@ import static com.google.common.base.Predicates.equalTo;
 import static com.google.common.base.Predicates.in;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Ordering.natural;
-import static com.google.common.collect.Sets.newHashSet;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -117,11 +116,6 @@ public class FluentListTest {
 	@Test
 	public void canReverseList() {
 		assertEquals(newArrayList("a", "b", "c"), fluent(newArrayList("c", "b", "a")).reverse());
-	}
-	
-	@Test
-	public void canConvertListToSet() {
-		assertEquals(newHashSet("a", "b"), fluent(newArrayList("b", "b", "a")).toSet());
 	}
 	
 	@Test

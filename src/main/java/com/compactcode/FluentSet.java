@@ -69,8 +69,4 @@ public class FluentSet<T> extends ForwardingSet<T> {
 		return delegate;
 	}
 
-	public FluentList<T> toList() {
-		return FluentList.fluent(this);
-	}
-
 }

@@ -15,28 +15,33 @@ import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import com.google.common.collect.Sets;
 
 public class FluentList<T> extends ForwardingList<T> {
-
-	public static <T> FluentList<T> fluent(List<T> delegate) {
-		return new FluentList<T>(delegate);
-	}
-	
-	public static <T> FluentList<T> fluent(Iterable<T> delegate) {
-		return new FluentList<T>(Lists.newArrayList(delegate));
-	}
 	
 	public static <T> FluentList<T> fluent(T... elements) {
 		return fluent(Lists.newArrayList(elements));
+	}
+
+	public static <T> FluentList<T> fluent(List<T> delegate) {
+		return fluent(delegate, new LazyTransformationStrategy());
+	}
+	
+	public static <T> FluentList<T> fluent(Iterable<T> delegate) {
+		return fluent(Lists.newArrayList(delegate));
+	}
+	
+	private static <T> FluentList<T> fluent(List<T> delegate, TransformationStrategy strategy) {
+		return new FluentList<T>(delegate, strategy);
+	}
+	
+	private static <T> FluentList<T> fluent(Iterable<T> delegate, TransformationStrategy strategy) {
+		return fluent(Lists.newArrayList(delegate), strategy);
 	}
 	
 	private final List<T> delegate;
 	private final TransformationStrategy strategy;
 	
-	public FluentList(List<T> delegate) {
-		this(delegate, new LazyTransformationStrategy());
-	}
-
 	public FluentList(List<T> delegate, TransformationStrategy strategy) {
 		this.delegate = delegate;
 		this.strategy = strategy;
@@ -46,7 +51,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Convert each element of this list into a new one.
 	 */
 	public <O> FluentList<O> transform(Function<? super T, O> mapper) {
-		return fluent(strategy.transform(delegate, mapper));
+		return fluent(strategy.transform(delegate, mapper), strategy);
 	}
 	
 	/**
@@ -78,7 +83,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Find all matching elements in this list.
 	 */
 	public FluentList<T> filter(Predicate<? super T> predicate) {
-		return fluent(Iterables.filter(this, predicate));
+		return fluent(Iterables.filter(this, predicate), strategy);
 	}
 	
 	/**
@@ -124,7 +129,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Return a sorted copy of this list using the given ordering.
 	 */
 	public FluentList<T> sort(Ordering<? super T> order) {
-		return fluent(order.sortedCopy(this));
+		return fluent(order.sortedCopy(this), strategy);
 	}
 	
 	/**
@@ -138,7 +143,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Return a copy of this list in reverse order.
 	 */
 	public FluentList<T> reverse() {
-		return fluent(Iterables.reverse(this));
+		return fluent(Iterables.reverse(this), strategy);
 	}
 	
 	/**
@@ -172,7 +177,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Return a copy of this list with duplicates removed.
 	 */
 	public FluentList<T> unique() {
-		return toSet().toList();
+		return fluent(Sets.newHashSet(this), strategy);
 	}
 	
 	/**
@@ -180,13 +185,6 @@ public class FluentList<T> extends ForwardingList<T> {
 	 */
 	public FluentList<T> compact() {
 		return filter(Predicates.notNull());
-	}
-	
-	/**
-	 * Return a copy of this list as a set.
-	 */
-	public FluentSet<T> toSet() {
-		return FluentSet.fluent(this);
 	}
 	
 	protected List<T> delegate() {

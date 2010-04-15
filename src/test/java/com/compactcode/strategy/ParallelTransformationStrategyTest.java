@@ -33,6 +33,20 @@ public class ParallelTransformationStrategyTest {
 	}
 	
 	@Test
+	public void transformAInParallelPropgatesTransformationErrors() {
+		Function<String, String> throwException = new Function<String, String>() {
+			public String apply(String value) {
+				throw new RuntimeException("propogated");
+			}
+		};
+		try {
+			fluent("1", "2", "3").parallel(2).transform(throwException);
+		} catch (Exception e) {
+			assertEquals("propogated", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void transformingInParallelIsFasterThanImmediateForSlowTransformations() {
 		final FluentList<Integer> source = fluent(1, 2, 3, 4, 5, 6);
 		
