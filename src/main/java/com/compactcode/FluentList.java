@@ -3,6 +3,9 @@ package com.compactcode;
 import java.util.Collection;
 import java.util.List;
 
+import com.compactcode.strategy.ImmediateTransformationStrategy;
+import com.compactcode.strategy.LazyTransformationStrategy;
+import com.compactcode.strategy.TransformationStrategy;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -27,16 +30,22 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 	
 	private final List<T> delegate;
+	private final TransformationStrategy strategy;
 	
 	public FluentList(List<T> delegate) {
+		this(delegate, new LazyTransformationStrategy());
+	}
+
+	public FluentList(List<T> delegate, TransformationStrategy strategy) {
 		this.delegate = delegate;
+		this.strategy = strategy;
 	}
 
 	/**
 	 * Convert each element of this list into a new one.
 	 */
 	public <O> FluentList<O> transform(Function<? super T, O> mapper) {
-		return fluent(Lists.transform(delegate, mapper));
+		return fluent(strategy.transform(delegate, mapper));
 	}
 	
 	/**
@@ -181,6 +190,20 @@ public class FluentList<T> extends ForwardingList<T> {
 	
 	protected List<T> delegate() {
 		return delegate;
+	}
+
+	/**
+	 * Subsequent transformations (map, transform) will be applied immediately.
+	 */
+	public FluentList<T> immediate() {
+		return new FluentList<T>(this, new ImmediateTransformationStrategy());
+	}
+
+	/**
+	 * Subsequent transformations (map, transform) will be applied lazily.
+	 */
+	public FluentList<T> lazy() {
+		return new FluentList<T>(this, new LazyTransformationStrategy());
 	}
 
 }
