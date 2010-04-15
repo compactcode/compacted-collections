@@ -17,7 +17,6 @@ import org.junit.Test;
 
 import com.google.common.base.Function;
 
-
 public class FluentListTest {
 	
 	@Test
@@ -76,18 +75,8 @@ public class FluentListTest {
 	}
 	
 	@Test
-	public void canFilterListUsingNegatedPredicate() {
-		assertEquals(newArrayList("a", "c"), fluent("a", "b", "c").filterNot(equalTo("b")));
-	}
-	
-	@Test
 	public void canFilterMatchingElementUsingPredicateAndFunction() {
 		assertEquals(newArrayList(2), fluent(1, 2).filter(toStringFunction(), equalTo("2")));
-	}
-	
-	@Test
-	public void canFilterMatchingElementUsingNegatedPredicateAndFunction() {
-		assertEquals(newArrayList(1), fluent(1, 2).filterNot(toStringFunction(), equalTo("2")));
 	}
 	
 	@Test

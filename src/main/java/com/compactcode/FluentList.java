@@ -72,22 +72,6 @@ public class FluentList<T> extends ForwardingList<T> {
 	
 	/**
 	 * Find all matching elements in this list.
-	 */
-	public <O> FluentList<T> filterNot(Predicate<? super T> predicate) {
-		return filter(Predicates.not(predicate));
-	}
-	
-	/**
-	 * Find all matching elements in this list.
-	 * 
-	 * Composes the given predicate and mapper.
-	 */
-	public <O> FluentList<T> filterNot(Function<? super T, O> mapper, Predicate<? super O> predicate) {
-		return filterNot(Predicates.compose(predicate, mapper));
-	}
-	
-	/**
-	 * Find all matching elements in this list.
 	 * 
 	 * Composes the given predicate and mapper.
 	 */

@@ -1,6 +1,6 @@
 package com.compactcode;
 
-import static com.compactcode.FluentFunction.fluent;
+import static com.compactcode.FluentFunction.function;
 import static com.compactcode.FluentList.fluent;
 import static com.compactcode.Functions.each;
 import static com.compactcode.Functions.propertyValue;
@@ -66,7 +66,12 @@ public class FunctionsTest {
 	
 	@Test
 	public void canComposeFunctionsFluently() {
-		assertEquals(3, fluent(Functions.toStringFunction()).compose(stringToInt()).apply(3));
+		assertEquals(3, function(Functions.toStringFunction()).map(stringToInt()).apply(3));
+	}
+	
+	@Test
+	public void canComposePredicatesFromFunctionsFluently() {
+		assertEquals(true, function(stringToInt()).check(Predicates.greaterThan(2)).apply("3"));
 	}
 	
 }
