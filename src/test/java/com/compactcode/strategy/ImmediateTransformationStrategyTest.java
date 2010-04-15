@@ -23,6 +23,7 @@ public class ImmediateTransformationStrategyTest {
 	
 	@Test
 	public void canImmediatelyTransformAList() {
+		FluentList.fluent(1, 2, null).compact();
 		try {
 			FluentList.fluent("1", "2").immediate().transform(throwException);
 			fail("not immediate");
