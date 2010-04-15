@@ -2,11 +2,7 @@
 
 Its simple...
 
-Start with [Google Collections](http://code.google.com/p/google-collections/).
-Get some inspiration from [Ruby](http://ruby-doc.org/core/classes/Array.html).
-And break out the [Fluent Interface](http://en.wikipedia.org/wiki/Fluent_interface).
-
-Now we're talking!
+I started with [Google Collections](http://code.google.com/p/google-collections/), got some inspiration from [Ruby](http://ruby-doc.org/core/classes/Array.html) and then whipped out the [Fluent Interface](http://en.wikipedia.org/wiki/Fluent_interface).
 
 ## Usage
 
@@ -21,7 +17,7 @@ Now we're talking!
 	
 By default transformations are performed lazily using google collections [Lists.transform](http://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/Lists.html#transform(java.util.List,%20com.google.common.base.Function).
 
-However, you can execute transformations immediately, Or in parallel using multiple threads.
+However, you can execute transformations immediately, or in parallel using multiple threads.
 
 	fluent("1", "2").immediate().map(toInt());
 	fluent("1", "2").parallel(2).map(toInt());
