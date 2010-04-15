@@ -97,14 +97,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 	
 	/**
-	 * Remove all null elements from this list.
-	 */
-	public FluentList<T> compact() {
-		return filter(Predicates.notNull());
-	}
-	
-	/**
-	 * Return a sorted copy of this list using natural ordering of each element toString.
+	 * Return a sorted copy of this list using natural ordering of each element as a string.
 	 */
 	public <O> FluentList<T> sort() {
 		return sort(Ordering.usingToString());
@@ -132,7 +125,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 	
 	/**
-	 * Return a copy of this list with reverse ordering.
+	 * Return a copy of this list in reverse order.
 	 */
 	public FluentList<T> reverse() {
 		return fluent(Iterables.reverse(this));
@@ -172,6 +165,16 @@ public class FluentList<T> extends ForwardingList<T> {
 		return toSet().toList();
 	}
 	
+	/**
+	 * Remove all null elements from this list.
+	 */
+	public FluentList<T> compact() {
+		return filter(Predicates.notNull());
+	}
+	
+	/**
+	 * Return a copy of this list as a set.
+	 */
 	public FluentSet<T> toSet() {
 		return FluentSet.fluent(this);
 	}
