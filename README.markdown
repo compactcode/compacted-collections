@@ -19,14 +19,11 @@ Now we're talking!
 	fluent("1", "2").map(toInt());
 	fluent("1", "2").map(toInt()).reduce(sum());
 	
-By default transformations are performed [lazily](http://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/Lists.html#transform(java.util.List,%20com.google.common.base.Function)).
+By default transformations are performed lazily using google collections [Lists.transform](http://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/Lists.html#transform(java.util.List,%20com.google.common.base.Function).
 
-However, you can execute transformations immediately.
+However, you can execute transformations immediately, Or in parallel using multiple threads.
 
 	fluent("1", "2").immediate().map(toInt());
-
-Or even in parallel, with a given number of threads.
-	
 	fluent("1", "2").parallel(2).map(toInt());
 	
 ### Filtering
