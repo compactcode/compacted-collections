@@ -5,5 +5,5 @@ import java.util.List;
 import com.google.common.base.Function;
 
 public interface TransformationStrategy {
-	<T, O>List<O> transform(List<T> source, Function<? super T, O> mapper);
+	<T, O>List<O> transform(List<T> fromList, Function<? super T, O> function);
 }

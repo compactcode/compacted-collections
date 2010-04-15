@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.compactcode.strategy.ImmediateTransformationStrategy;
 import com.compactcode.strategy.LazyTransformationStrategy;
+import com.compactcode.strategy.ParallelTransformationStrategy;
 import com.compactcode.strategy.TransformationStrategy;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -204,6 +205,13 @@ public class FluentList<T> extends ForwardingList<T> {
 	 */
 	public FluentList<T> lazy() {
 		return new FluentList<T>(this, new LazyTransformationStrategy());
+	}
+
+	/**
+	 * Subsequent transformations (map, transform) will be applied in parallel using the given number of threads.
+	 */
+	public FluentList<T> parallel(int threads) {
+		return new FluentList<T>(this, new ParallelTransformationStrategy(threads));
 	}
 
 }
