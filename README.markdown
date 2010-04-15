@@ -10,11 +10,11 @@ Now we're talking!
 
 ## Usage
 
-* Overview
+### Overview
 
 	fluent("1", "2", "3", "4", "4").map(toInt()).filter(greaterThan(1)).reverse();
 	
-* Transformation
+### Transformation
 
 	fluent("1", "2").map(toInt());
 	fluent("1", "2").map(toInt()).reduce(sum());
@@ -29,19 +29,19 @@ Or even in parallel, with a given number of threads.
 	
 	fluent("1", "2").parallel(2).map(toInt());
 	
-* Filtering
+### Filtering
 
 	fluent(1, 2, 3).filter(greaterThan(1));
 	fluent(1, 2).find(equalTo(1)); 
 	fluent(1, 2).first(); 
 	fluent(1, 2).last(); 
 	
-* Sorting
+### Sorting
 
 	fluent(1, 3, 2).sort(natural())
 	fluent(1, 2, 3).reverse()
 	
-* Other
+### Other
 
 	fluent("1", "2", "2").unique();
 	fluent("1", "2", null).compact();
