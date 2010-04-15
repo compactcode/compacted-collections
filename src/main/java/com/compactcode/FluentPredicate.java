@@ -16,11 +16,19 @@ public class FluentPredicate<T> implements Predicate<T> {
 	}
 
 	public FluentPredicate<T> and(Predicate<T> other) {
-		return predicate(Predicates.<T>and(other, delegate));
+		return predicate(Predicates.<T>and(delegate, other));
 	}
 	
 	public FluentPredicate<T> andNot(Predicate<T> other) {
 		return and(Predicates.not(other));
+	}
+	
+	public FluentPredicate<T> or(Predicate<T> other) {
+		return predicate(Predicates.<T>or(delegate, other));
+	}
+	
+	public FluentPredicate<T> orNot(Predicate<T> other) {
+		return or(Predicates.not(other));
 	}
 	
 	public final boolean apply(T input) {
