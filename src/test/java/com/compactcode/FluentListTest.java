@@ -154,4 +154,9 @@ public class FluentListTest {
 		assertEquals(null, fluent().last());
 	}
 	
+	@Test
+	public void canRemoveDuplicatesFromAList() {
+		assertEquals(newArrayList(11, 22), fluent(11, 22, 22, 11).unique().sort());
+	}
+	
 }

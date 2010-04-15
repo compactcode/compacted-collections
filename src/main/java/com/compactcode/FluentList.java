@@ -103,6 +103,13 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 	
 	/**
+	 * Return a sorted copy of this list using natural ordering of each element toString.
+	 */
+	public <O> FluentList<T> sort() {
+		return sort(Ordering.usingToString());
+	}
+	
+	/**
 	 * Return a sorted copy of this list using natural ordering.
 	 */
 	public <O> FluentList<T> sort(Function<T, ? extends Comparable<O>> mapper) {
@@ -148,6 +155,13 @@ public class FluentList<T> extends ForwardingList<T> {
 			return null;
 		}
 		return get(size() - 1);
+	}
+	
+	/**
+	 * Return a copy of this list with duplicates removed.
+	 */
+	public FluentList<T> unique() {
+		return toSet().toList();
 	}
 	
 	public FluentSet<T> toSet() {
