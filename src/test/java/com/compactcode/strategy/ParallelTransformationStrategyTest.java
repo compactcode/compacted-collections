@@ -3,6 +3,7 @@ package com.compactcode.strategy;
 import static com.compactcode.FluentList.fluent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -40,9 +41,10 @@ public class ParallelTransformationStrategyTest {
 			}
 		};
 		try {
-			fluent("1", "2", "3").parallel(2).transform(throwException);
+			fluent("1").parallel(2).transform(throwException);
+			fail();
 		} catch (Exception e) {
-			assertEquals("propogated", e.getMessage());
+			assertEquals(true, e.getMessage().contains("propogated"));
 		}
 	}
 	

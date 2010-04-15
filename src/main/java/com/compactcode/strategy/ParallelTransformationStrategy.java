@@ -4,6 +4,7 @@ import static com.compactcode.FluentList.fluent;
 
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -23,7 +24,7 @@ public class ParallelTransformationStrategy implements TransformationStrategy {
 		try {
 			Function<T, Callable<O>> toCallable = toCallable(transform);
 			Function<Future<O>, O> fromFuture = fromFuture();
-			return fluent(executors.invokeAll(fluent(fromList).map(toCallable))).map(fromFuture);
+			return fluent(executors.invokeAll(fluent(fromList).map(toCallable))).immediate().map(fromFuture);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		} finally {
