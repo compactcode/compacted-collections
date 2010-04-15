@@ -159,4 +159,9 @@ public class FluentListTest {
 		assertEquals(newArrayList(11, 22), fluent(11, 22, 22, 11).unique().sort());
 	}
 	
+	@Test
+	public void canJoinAList() {
+		assertEquals("1, 2, 3", fluent(1, 2, 3).join(", "));
+	}
+	
 }

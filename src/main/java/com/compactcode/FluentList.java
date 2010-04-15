@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ForwardingList;
@@ -155,6 +156,13 @@ public class FluentList<T> extends ForwardingList<T> {
 			return null;
 		}
 		return get(size() - 1);
+	}
+	
+	/**
+	 * Return a string created by concatenating each element seperated by the given seperator.
+	 */
+	public String join(String seperator) {
+		return Joiner.on(seperator).join(this);
 	}
 	
 	/**
