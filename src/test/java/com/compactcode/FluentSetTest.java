@@ -50,18 +50,8 @@ public class FluentSetTest {
 	}
 	
 	@Test
-	public void canFilterListUsingNegatedPredicate() {
-		assertEquals(newHashSet("a", "c"), fluent("a", "b", "c").filterNot(equalTo("b")));
-	}
-	
-	@Test
 	public void canFilterMatchingElementUsingPredicateAndFunction() {
 		assertEquals(newHashSet(2), fluent(1, 2).filter(toStringFunction(), equalTo("2")));
-	}
-	
-	@Test
-	public void canFilterMatchingElementUsingNegatedPredicateAndFunction() {
-		assertEquals(newHashSet(1), fluent(1, 2).filterNot(toStringFunction(), equalTo("2")));
 	}
 	
 }

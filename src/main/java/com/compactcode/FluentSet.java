@@ -58,22 +58,6 @@ public class FluentSet<T> extends ForwardingSet<T> {
 	
 	/**
 	 * Find all matching elements in this set.
-	 */
-	public <O> FluentSet<T> filterNot(Predicate<? super T> predicate) {
-		return filter(Predicates.not(predicate));
-	}
-	
-	/**
-	 * Find all matching elements in this set.
-	 * 
-	 * Composes the given predicate and mapper.
-	 */
-	public <O> FluentSet<T> filterNot(Function<? super T, O> mapper, Predicate<? super O> predicate) {
-		return filterNot(Predicates.compose(predicate, mapper));
-	}
-	
-	/**
-	 * Find all matching elements in this set.
 	 * 
 	 * Composes the given predicate and mapper.
 	 */
