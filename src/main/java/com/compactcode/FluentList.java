@@ -70,13 +70,15 @@ public class FluentList<T> extends ForwardingList<T> {
 	
 	/**
 	 * Convert each element of this list into a list, then concatenate those lists.
+	 * 
+	 * Lazy transformation is not supported during expand, defaults to immediate in this case.
 	 */
 	public <O> FluentList<O> expand(Function<T, List<O>> expander) {
 		List<O> flat = Lists.newArrayList();
 		for (List<O> sublist : map(expander)) {
 			flat.addAll(sublist);
 		}
-		return fluent(flat);
+		return fluent(flat, strategy);
 	}
 	
 	/**
