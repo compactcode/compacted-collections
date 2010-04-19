@@ -6,12 +6,19 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
+import org.hamcrest.beans.HasPropertyWithValue;
+
 import com.google.common.base.Function;
 
+/**
+ * A collection of useful {@link Function}s.
+ */
 public final class Functions {
 
 	/**
 	 * A non-typesafe way to extract property values using reflection.
+	 * 
+	 * @see {@link HasPropertyWithValue#hasProperty(String, org.hamcrest.Matcher)} 
 	 */
 	public static final <T, O> Function<T, O> propertyValue(final String name) {
 		return new Function<T, O>() {
