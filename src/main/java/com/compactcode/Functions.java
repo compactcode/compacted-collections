@@ -18,7 +18,7 @@ public final class Functions {
 	/**
 	 * A non-typesafe way to extract property values using reflection.
 	 * 
-	 * @see {@link HasPropertyWithValue#hasProperty(String, org.hamcrest.Matcher)} 
+	 * See {@link HasPropertyWithValue#hasProperty(String, org.hamcrest.Matcher)} 
 	 */
 	public static final <T, O> Function<T, O> propertyValue(final String name) {
 		return new Function<T, O>() {

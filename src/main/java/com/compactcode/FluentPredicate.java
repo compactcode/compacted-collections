@@ -24,28 +24,28 @@ public class FluentPredicate<T> implements Predicate<T> {
 	}
 
 	/**
-	 * And this predicate with the given predicate using {@link Predicates#and(Predicate, Predicate)}.
+	 * And this predicate with the given predicate.
 	 */
 	public FluentPredicate<T> and(Predicate<T> other) {
 		return predicate(Predicates.<T>and(delegate, other));
 	}
 	
 	/**
-	 * And this predicate with the negation of the given predicate using {@link Predicates#and(Predicate, Predicate)}.
+	 * And this predicate with the negation of the given predicate.
 	 */
 	public FluentPredicate<T> andNot(Predicate<T> other) {
 		return and(Predicates.not(other));
 	}
 	
 	/**
-	 * Or this predicate with the given predicate using {@link Predicates#or(Predicate, Predicate)}.
+	 * Or this predicate with the given predicate using.
 	 */
 	public FluentPredicate<T> or(Predicate<T> other) {
 		return predicate(Predicates.<T>or(delegate, other));
 	}
 	
 	/**
-	 * Or this predicate with the negation of the given predicate using {@link Predicates#or(Predicate, Predicate)}.
+	 * Or this predicate with the negation of the given predicate.
 	 */
 	public FluentPredicate<T> orNot(Predicate<T> other) {
 		return or(Predicates.not(other));

@@ -56,7 +56,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	private final List<T> delegate;
 	private final TransformationStrategy strategy;
 	
-	public FluentList(List<T> delegate, TransformationStrategy strategy) {
+	private FluentList(List<T> delegate, TransformationStrategy strategy) {
 		this.delegate = delegate;
 		this.strategy = strategy;
 	}

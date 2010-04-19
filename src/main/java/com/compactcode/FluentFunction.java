@@ -27,14 +27,14 @@ public class FluentFunction<A, B> implements Function<A, B>{
 	}
 
 	/**
-	 * Compose this function with the given function using {@link Functions#compose(Function, Function)}.
+	 * Compose this function with the given function.
 	 */
 	public <C> FluentFunction<A, C> map(Function<? super B, C> next) {
 		return function(Functions.compose(next, delegate));
 	}
 	
 	/**
-	 * Compose this function with the given predicate using {@link Predicates#compose(Predicate, Function)}.
+	 * Compose this function with the given predicate.
 	 */
 	public FluentPredicate<A> check(Predicate<B> next) {
 		return FluentPredicate.predicate(Predicates.compose(next, this));
