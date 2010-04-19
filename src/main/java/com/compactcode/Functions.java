@@ -43,7 +43,7 @@ public final class Functions {
 	}
 	
 	/**
-	 * Converts strings to {@link Integer}s using {@link Integer#valueOf(String)}
+	 * Converts a string to an {@link Integer} using {@link Integer#valueOf(String)}
 	 */
 	public static final Function<String, Integer> stringToInt() {
 		return new Function<String, Integer>() {
@@ -61,7 +61,7 @@ public final class Functions {
 	}
 	
 	/**
-	 * Converts strings to {@link Long}s using {@link Long#valueOf(String)}
+	 * Converts a string to a {@link Long} using {@link Long#valueOf(String)}
 	 */
 	public static final Function<String, Long> stringToLong() {
 		return new Function<String, Long>() {
