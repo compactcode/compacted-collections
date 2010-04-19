@@ -56,7 +56,7 @@ public class FunctionsTest {
 	
 	@Test
 	public void canSumIntegers() {
-		assertEquals(6, fluent(newArrayList(1, 2, 3)).reduce(sum()));
+		assertEquals(Integer.valueOf(6), fluent(newArrayList(1, 2, 3)).reduce(sum()));
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class FunctionsTest {
 	
 	@Test
 	public void canComposeFunctionsFluently() {
-		assertEquals(3, function(Functions.toStringFunction()).map(stringToInt()).apply(3));
+		assertEquals(Integer.valueOf(3), function(Functions.toStringFunction()).map(stringToInt()).apply(3));
 	}
 	
 	@Test

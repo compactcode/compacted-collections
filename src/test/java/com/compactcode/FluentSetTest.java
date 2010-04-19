@@ -41,7 +41,7 @@ public class FluentSetTest {
 	
 	@Test
 	public void canSumListUsingReduce() {
-		assertEquals(3, fluent(1, 2).reduce(sum()));
+		assertEquals(Integer.valueOf(3), fluent(1, 2).reduce(sum()));
 	}
 	
 	@Test

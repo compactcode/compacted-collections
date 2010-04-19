@@ -1,7 +1,5 @@
 # A sexier way to use google collections in your Java projects.
 
-Its simple...
-
 I started with [Google Collections](http://code.google.com/p/google-collections/), got some inspiration from [Ruby](http://ruby-doc.org/core/classes/Array.html) and then whipped out the [Fluent Interface](http://en.wikipedia.org/wiki/Fluent_interface).
 
 ## Usage
