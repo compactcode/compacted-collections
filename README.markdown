@@ -22,6 +22,8 @@ However, you can execute transformations immediately, or in parallel using multi
 	
 ### Filtering
 
+A standard library of matchers are provided by the (Hamcrest)[http://code.google.com/p/hamcrest/] project.
+
 	fluent(1, 2, 3).filter(greaterThan(1));
 	fluent(1, 2).find(equalTo(1)); 
 	fluent(1, 2).first(); 
@@ -36,3 +38,15 @@ However, you can execute transformations immediately, or in parallel using multi
 
 	fluent("1", "2", "2").unique();
 	fluent("1", "2", null).compact();
+
+## Installation + Setup
+
+This project is built using (Apache Maven)[http://maven.apache.org/].
+
+You can configure an eclipse project using Maven like so:
+
+	mvn eclipse:eclipse
+
+## Resources
+
+[JavaDocs](http://compactcode.github.com/fluent-google-collections/apidocs/)
