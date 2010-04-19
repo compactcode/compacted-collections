@@ -8,10 +8,12 @@ import static com.google.common.base.Predicates.equalTo;
 import static com.google.common.base.Predicates.in;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Ordering.natural;
+import static org.hamcrest.collection.IsIn.isIn;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -74,6 +76,11 @@ public class FluentListTest {
 	}
 	
 	@Test
+	public void canFilterUsingMatcher() {
+		assertEquals(newArrayList("b", "c"), fluent("a", "b", "c").filter(isIn(newArrayList("b", "c"))));
+	}
+	
+	@Test
 	public void canFilterMatchingElementUsingPredicateAndFunction() {
 		assertEquals(newArrayList(2), fluent(1, 2).filter(toStringFunction(), equalTo("2")));
 	}
@@ -81,6 +88,11 @@ public class FluentListTest {
 	@Test
 	public void canFindFirstMatchingElementUsingPredicate() {
 		assertEquals("b", fluent("a", "b", "b").find(equalTo("b")));
+	}
+	
+	@Test
+	public void canFindFirstMatchingElementUsingMatcher() {
+		assertEquals("b", fluent("a", "b", "b").find(IsEqual.equalTo("b")));
 	}
 	
 	@Test

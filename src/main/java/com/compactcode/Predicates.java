@@ -5,13 +5,21 @@ import org.hamcrest.number.OrderingComparisons;
 
 import com.google.common.base.Predicate;
 
+/**
+ * Use the {@link Matcher}s provided by hamcrest instead.
+ */
+@Deprecated
 public final class Predicates {
 
+	/**
+	 * Use {@link OrderingComparisons#greaterThan(Comparable)} instead.
+	 */
+	@Deprecated
 	public static final Predicate<Integer> greaterThan(final int target) {
 		return fromMatcher(OrderingComparisons.greaterThan(target));
 	}
 	
-	public static final <T> Predicate<T> fromMatcher(final Matcher<T> matcher) {
+	private static final <T> Predicate<T> fromMatcher(final Matcher<T> matcher) {
 		return new Predicate<T>() {
 			public boolean apply(T element) {
 				return matcher.matches(element);

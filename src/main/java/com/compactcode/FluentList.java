@@ -3,6 +3,8 @@ package com.compactcode;
 import java.util.Collection;
 import java.util.List;
 
+import org.hamcrest.Matcher;
+
 import com.compactcode.strategy.ImmediateTransformationStrategy;
 import com.compactcode.strategy.LazyTransformationStrategy;
 import com.compactcode.strategy.ParallelTransformationStrategy;
@@ -90,6 +92,17 @@ public class FluentList<T> extends ForwardingList<T> {
 	
 	/**
 	 * Find all matching elements in this list.
+	 */
+	public FluentList<T> filter(final Matcher<? super T> matcher) {
+		return filter(new Predicate<T>() {
+			public boolean apply(T element) {
+				return matcher.matches(element);
+			}
+		});
+	}
+	
+	/**
+	 * Find all matching elements in this list.
 	 * 
 	 * Composes the given predicate and mapper.
 	 */
@@ -101,6 +114,13 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Find the first matching element in this list, or return null.
 	 */
 	public T find(Predicate<? super T> predicate) {
+		return filter(predicate).first();
+	}
+	
+	/**
+	 * Find the first matching element in this list, or return null.
+	 */
+	public T find(Matcher<? super T> predicate) {
 		return filter(predicate).first();
 	}
 	
