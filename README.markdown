@@ -22,7 +22,7 @@ However, you can execute transformations immediately, or in parallel using multi
 	
 ### Filtering
 
-A standard library of matchers are provided by the (Hamcrest)[http://code.google.com/p/hamcrest/] project.
+A standard library of matchers are provided by the [Hamcrest](http://code.google.com/p/hamcrest/) project.
 
 	fluent(1, 2, 3).filter(greaterThan(1));
 	fluent(1, 2).find(equalTo(1)); 
@@ -41,7 +41,7 @@ A standard library of matchers are provided by the (Hamcrest)[http://code.google
 
 ## Installation + Setup
 
-This project is built using (Apache Maven)[http://maven.apache.org/].
+This project is built using [Apache Maven](http://maven.apache.org/).
 
 You can configure an eclipse project using Maven like so:
 
