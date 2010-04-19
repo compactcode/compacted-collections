@@ -13,18 +13,18 @@ import com.google.common.base.Function;
 
 /**
  * A transformation strategy that uses a {@link ThreadPoolExecutor} to transform items in parallel 
- * using a number of {@link Thread}s. 
+ * using a given number of threads. 
  */
 public class ParallelTransformationStrategy implements TransformationStrategy {
 
-	private final int threads;
+	private final int numThreads;
 	
-	public ParallelTransformationStrategy(int threads) {
-		this.threads = threads;
+	public ParallelTransformationStrategy(int numThreads) {
+		this.numThreads = numThreads;
 	}
 
 	public <T, O> List<O> transform(List<T> fromList, Function<? super T, O> transform) {
-		ExecutorService executors = Executors.newFixedThreadPool(threads);
+		ExecutorService executors = Executors.newFixedThreadPool(numThreads);
 		try {
 			Function<T, Callable<O>> toCallable = toCallable(transform);
 			Function<Future<O>, O> fromFuture = fromFuture();

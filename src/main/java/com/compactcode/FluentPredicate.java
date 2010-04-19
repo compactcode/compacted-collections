@@ -10,6 +10,9 @@ import com.google.common.base.Predicates;
  */
 public class FluentPredicate<T> implements Predicate<T> {
 
+	/**
+	 * Wrap the given predicate with fluent behaviour.
+	 */
 	public static final <T> FluentPredicate<T> predicate(Predicate<T> predicate) {
 		return new FluentPredicate<T>(predicate);
 	}

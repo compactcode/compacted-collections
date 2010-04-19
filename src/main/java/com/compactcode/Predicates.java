@@ -6,13 +6,13 @@ import org.hamcrest.number.OrderingComparisons;
 import com.google.common.base.Predicate;
 
 /**
- * Use the {@link Matcher}s provided by hamcrest instead.
+ * Use the {@link Matcher} library provided by hamcrest instead.
  */
 @Deprecated
 public final class Predicates {
 
 	/**
-	 * Use {@link OrderingComparisons#greaterThan(Comparable)} instead.
+	 * Use {@link OrderingComparisons} instead.
 	 */
 	@Deprecated
 	public static final Predicate<Integer> greaterThan(final int target) {

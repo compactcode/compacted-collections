@@ -11,7 +11,7 @@ import org.hamcrest.beans.HasPropertyWithValue;
 import com.google.common.base.Function;
 
 /**
- * A collection of useful {@link Function}s.
+ * A collection of useful functions.
  */
 public final class Functions {
 

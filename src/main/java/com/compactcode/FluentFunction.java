@@ -13,6 +13,9 @@ import com.google.common.base.Predicates;
  */
 public class FluentFunction<A, B> implements Function<A, B>{
 	
+	/**
+	 * Wrap the given function with fluent behaviour.
+	 */
 	public static final <A, B> FluentFunction<A, B> function(Function<A, B> function) {
 		return new FluentFunction<A, B>(function);
 	}

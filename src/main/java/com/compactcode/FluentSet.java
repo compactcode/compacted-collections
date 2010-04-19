@@ -12,10 +12,16 @@ import com.google.common.collect.Sets;
 
 public class FluentSet<T> extends ForwardingSet<T> {
 
+	/**
+	 * Create a new fluent set from the given iterable.
+	 */
 	public static <T> FluentSet<T> fluent(Iterable<T> delegate) {
 		return new FluentSet<T>(Sets.newHashSet(delegate));
 	}
 	
+	/**
+	 * Create a new fluent set from the given elements.
+	 */
 	public static <T> FluentSet<T> fluent(T... elements) {
 		return new FluentSet<T>(Sets.newHashSet(elements));
 	}

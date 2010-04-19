@@ -19,16 +19,28 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 
+/**
+ * A list that provides a convenient, fluent way of interacting with the google collections api.
+ */
 public class FluentList<T> extends ForwardingList<T> {
 	
+	/**
+	 * Create a new fluent list from the given elements.
+	 */
 	public static <T> FluentList<T> fluent(T... elements) {
 		return fluent(Lists.newArrayList(elements));
 	}
 
+	/**
+	 * Create a new fluent list that wraps the given list.
+	 */
 	public static <T> FluentList<T> fluent(List<T> delegate) {
 		return fluent(delegate, new LazyTransformationStrategy());
 	}
 	
+	/**
+	 * Create a new fluent list from the given iterable.
+	 */
 	public static <T> FluentList<T> fluent(Iterable<T> delegate) {
 		return fluent(Lists.newArrayList(delegate));
 	}
@@ -57,7 +69,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 	
 	/**
-	 * Synonym for transform.
+	 * Synonym for #{@link FluentList#transform(Function)}.
 	 */
 	public <O> FluentList<O> map(Function<? super T, O> mapper) {
 		return transform(mapper);
