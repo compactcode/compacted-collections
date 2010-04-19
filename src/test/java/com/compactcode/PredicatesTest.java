@@ -19,7 +19,7 @@ public class PredicatesTest {
 
 	@Test
 	public void canAndPredicatesFluently() {
-		assertEquals(false, predicate(greaterThan(2)).and(Predicates.<Integer>alwaysFalse()).apply(3));
+		assertEquals(false, predicate(Predicates.alwaysTrue()).and(Predicates.alwaysFalse()).apply(3));
 	}
 	
 	@Test

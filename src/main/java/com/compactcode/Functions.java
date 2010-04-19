@@ -28,6 +28,16 @@ public final class Functions {
 		};
 	}
 	
+	/**
+	 * Shortcut for {@link #stringToInt()}
+	 */
+	public static final Function<String, Integer> toInt() {
+		return stringToInt();
+	}
+	
+	/**
+	 * Converts strings to {@link Integer}s using {@link Integer#valueOf(String)}
+	 */
 	public static final Function<String, Integer> stringToInt() {
 		return new Function<String, Integer>() {
 			public Integer apply(String value) {
@@ -36,6 +46,16 @@ public final class Functions {
 		};
 	}
 	
+	/**
+	 * Shortcut for {@link #stringToLong()}
+	 */
+	public static final Function<String, Long> toLong() {
+		return stringToLong();
+	}
+	
+	/**
+	 * Converts strings to {@link Long}s using {@link Long#valueOf(String)}
+	 */
 	public static final Function<String, Long> stringToLong() {
 		return new Function<String, Long>() {
 			public Long apply(String value) {
