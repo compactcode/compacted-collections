@@ -28,6 +28,13 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Create a new fluent list from the given elements.
 	 */
 	public static <T> FluentList<T> fluent(T... elements) {
+		return listOf(elements);
+	}
+
+	/**
+	 * Create a new fluent list from the given elements.
+	 */
+	public static <T> FluentList<T> listOf(T... elements) {
 		return fluent(Lists.newArrayList(elements));
 	}
 

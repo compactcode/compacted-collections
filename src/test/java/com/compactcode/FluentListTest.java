@@ -1,6 +1,6 @@
 package com.compactcode;
 
-import static com.compactcode.FluentList.fluent;
+import static com.compactcode.FluentList.*;
 import static com.compactcode.Functions.stringToInt;
 import static com.compactcode.Functions.sum;
 import static com.google.common.base.Functions.toStringFunction;
@@ -23,6 +23,11 @@ public class FluentListTest {
 	@Test
 	public void canCreateFluentListFromElements() {
 		assertEquals(newArrayList("a", "b"), fluent("a", "b"));
+	}
+
+	@Test
+	public void canCreateFluentListFromElementsUsingListOf() {
+		assertEquals(newArrayList("a", "b"), listOf("a", "b"));
 	}
 	
 	@Test
