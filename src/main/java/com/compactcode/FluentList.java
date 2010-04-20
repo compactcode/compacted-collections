@@ -113,13 +113,9 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Find all matching elements in this list.
 	 */
 	public FluentList<T> filter(final Matcher<? super T> matcher) {
-		return filter(new Predicate<T>() {
-			public boolean apply(T element) {
-				return matcher.matches(element);
-			}
-		});
+		return filter(asPredicate(matcher));
 	}
-	
+
 	/**
 	 * Find all matching elements in this list.
 	 * 
@@ -127,6 +123,15 @@ public class FluentList<T> extends ForwardingList<T> {
 	 */
 	public <O> FluentList<T> filter(Function<? super T, O> mapper, Predicate<? super O> predicate) {
 		return filter(Predicates.compose(predicate, mapper));
+	}
+	
+	/**
+	 * Find all matching elements in this list.
+	 * 
+	 * Composes the given predicate and mapper.
+	 */
+	public <O> FluentList<T> filter(Function<? super T, O> mapper, Matcher<? super O> matcher) {
+		return filter(mapper, asPredicate(matcher));
 	}
 	
 	/**
@@ -150,6 +155,15 @@ public class FluentList<T> extends ForwardingList<T> {
 	 */
 	public <O> T find(Function<? super T, O> mapper, Predicate<? super O> predicate) {
 		return find(Predicates.compose(predicate, mapper));
+	}
+	
+	/**
+	 * Find the first matching element in this list, or return null.
+	 * 
+	 * Composes the given predicate and mapper.
+	 */
+	public <O> T find(Function<? super T, O> mapper, Matcher<? super O> matcher) {
+		return find(mapper, asPredicate(matcher));
 	}
 	
 	/**
@@ -253,4 +267,12 @@ public class FluentList<T> extends ForwardingList<T> {
 		return new FluentList<T>(this, new ParallelTransformationStrategy(threads));
 	}
 
+	private <O >Predicate<O> asPredicate(final Matcher<? super O> matcher) {
+		return new Predicate<O>() {
+			public boolean apply(O element) {
+				return matcher.matches(element);
+			}
+		};
+	}
+	
 }

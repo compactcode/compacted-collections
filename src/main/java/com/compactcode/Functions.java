@@ -16,11 +16,19 @@ import com.google.common.base.Function;
 public final class Functions {
 
 	/**
+	 * Use {@link Functions#toPropertyValue(String)} instead.
+	 */
+	@Deprecated
+	public static final <T, O> Function<T, O> propertyValue(final String name) {
+		return toPropertyValue(name);
+	}
+
+	/**
 	 * A non-typesafe way to extract property values using reflection.
 	 * 
-	 * See {@link HasPropertyWithValue#hasProperty(String, org.hamcrest.Matcher)} 
+	 * See also {@link HasPropertyWithValue#hasProperty(String, org.hamcrest.Matcher)} 
 	 */
-	public static final <T, O> Function<T, O> propertyValue(final String name) {
+	public static <T, O> Function<T, O> toPropertyValue(final String name) {
 		return new Function<T, O>() {
 			@SuppressWarnings("unchecked")
 			public O apply(T source) {

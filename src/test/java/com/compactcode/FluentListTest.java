@@ -91,6 +91,11 @@ public class FluentListTest {
 	}
 	
 	@Test
+	public void canFilterMatchingElementUsingMatcherAndFunction() {
+		assertEquals(newArrayList(2), fluent(1, 2).filter(toStringFunction(), IsEqual.equalTo("2")));
+	}
+	
+	@Test
 	public void canFindFirstMatchingElementUsingPredicate() {
 		assertEquals("b", fluent("a", "b", "b").find(equalTo("b")));
 	}
@@ -103,6 +108,11 @@ public class FluentListTest {
 	@Test
 	public void canFindFirstMatchingElementUsingPredicateAndFunction() {
 		assertEquals(Integer.valueOf(2), fluent(newArrayList(1, 2)).find(toStringFunction(), equalTo("2")));
+	}
+	
+	@Test
+	public void canFindFirstMatchingElementUsingPredicateAndMatcher() {
+		assertEquals(Integer.valueOf(2), fluent(newArrayList(1, 2)).find(toStringFunction(), IsEqual.equalTo("2")));
 	}
 	
 	@Test

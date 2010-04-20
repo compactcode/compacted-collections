@@ -3,12 +3,12 @@ package com.compactcode;
 import static com.compactcode.FluentFunction.function;
 import static com.compactcode.FluentList.fluent;
 import static com.compactcode.Functions.each;
-import static com.compactcode.Functions.propertyValue;
 import static com.compactcode.Functions.stringToInt;
 import static com.compactcode.Functions.stringToLong;
 import static com.compactcode.Functions.sum;
 import static com.compactcode.Functions.toInt;
 import static com.compactcode.Functions.toLong;
+import static com.compactcode.Functions.toPropertyValue;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -53,14 +53,14 @@ public class FunctionsTest {
 	
 	@Test
 	public void canMapObjectsToPropertyValues() {
-		Function<Customer, String> toName = propertyValue("name");
+		Function<Customer, String> toName = toPropertyValue("name");
 		assertEquals(newArrayList("a", "b"), fluent(new Customer("a"), new Customer("b")).map(toName));
 	}
 	
 	@Test
 	public void cannotMapObjectsToPropertyValuesWhenPropertyNameIsIncorrect() {
 		try {
-			fluent(new Customer("1")).map(propertyValue("notAProperty")).hashCode();
+			fluent(new Customer("1")).map(toPropertyValue("notAProperty")).hashCode();
 			fail();
 		}catch (Exception e) {
 			assertEquals("java.lang.NoSuchFieldException: notAProperty", e.getMessage());
