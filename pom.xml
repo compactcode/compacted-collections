@@ -3,10 +3,11 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.compactcode</groupId>
-	<artifactId>fluent-google-collections</artifactId>
+	<artifactId>compacted-collections</artifactId>
 	<packaging>jar</packaging>
 	<version>2.2</version>
-	<name>Fluent Google Collections</name>
+	<name>Compacted Collections</name>
+	<description>Bringing Ruby style collections to java. Built on top of the google collections api.</description>
 	<url>http://compactcode.com/</url>
 	<dependencies>
 		<dependency>
