@@ -42,7 +42,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Create a new fluent list that wraps the given list.
 	 */
 	public static <T> FluentList<T> fluent(List<T> delegate) {
-		return fluent(delegate, new LazyTransformationStrategy());
+		return fluent(delegate, new ImmediateTransformationStrategy());
 	}
 	
 	/**
@@ -247,21 +247,23 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied immediately.
+	 * Subsequent transformations (map, transform) will be applied using a {@link ImmediateTransformationStrategy}.
+	 * 
+	 * This is the default behaviour.
 	 */
 	public FluentList<T> immediate() {
 		return new FluentList<T>(this, new ImmediateTransformationStrategy());
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied lazily.
+	 * Subsequent transformations (map, transform) will be applied using a {@link LazyTransformationStrategy}.
 	 */
 	public FluentList<T> lazy() {
 		return new FluentList<T>(this, new LazyTransformationStrategy());
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied in parallel using the given number of threads.
+	 * Subsequent transformations (map, transform) will be applied using a {@link ParallelTransformationStrategy}.
 	 */
 	public FluentList<T> parallel(int threads) {
 		return new FluentList<T>(this, new ParallelTransformationStrategy(threads));

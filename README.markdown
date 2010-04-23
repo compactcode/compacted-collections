@@ -2,7 +2,7 @@
 
 I started with [Google Collections](http://code.google.com/p/google-collections/), got some inspiration from [Ruby](http://ruby-doc.org/core/classes/Array.html) and then whipped out the [Fluent Interface](http://en.wikipedia.org/wiki/Fluent_interface).
 
-This project has been designed to be used in conjunction with google collections api, not as a replacement.
+This project has been designed to be used in conjunction with the google collections api, not as a replacement.
 
 ## Usage
 
@@ -15,11 +15,11 @@ This project has been designed to be used in conjunction with google collections
 	listOf("1", "2").map(toInt());
 	listOf("1", "2").map(toInt()).reduce(sum());
 	
-By default transformations are performed lazily using google collections [Lists.transform](http://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/Lists.html#transform(java.util.List,%20com.google.common.base.Function).
+By default transformations are performed immediately.
 
-However, you can execute transformations immediately, or in parallel using multiple threads.
+However, you can execute transformations lazily, or in parallel using multiple threads.
 
-	listOf("1", "2").immediate().map(toInt());
+	listOf("1", "2").lazy().map(toInt());
 	listOf("1", "2").parallel(2).map(toInt());
 	
 ### Filtering

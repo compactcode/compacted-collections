@@ -10,6 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Ordering.natural;
 import static org.hamcrest.collection.IsIn.isIn;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -41,23 +42,33 @@ public class FluentListTest {
 	}
 	
 	@Test
-	public void transformIsLazy() {
+	public void transformIsImmediateByDefault() {
 		Function<String, String> throwException = new Function<String, String>() {
 			public String apply(String value) {
 				throw new RuntimeException("not lazy");
 			}
 		};
-		fluent("1", "2").transform(throwException);
+		try {
+			fluent("1", "2").transform(throwException);
+			fail();
+		} catch (Exception e) {
+			assertEquals("not lazy", e.getMessage());
+		}
 	}
 	
 	@Test
-	public void mapIsLazy() {
+	public void mapIsImmediateByDefault() {
 		Function<String, String> throwException = new Function<String, String>() {
 			public String apply(String value) {
 				throw new RuntimeException("not lazy");
 			}
 		};
-		fluent("1", "2").map(throwException);
+		try {
+			fluent("1", "2").map(throwException);
+			fail();
+		} catch (Exception e) {
+			assertEquals("not lazy", e.getMessage());
+		}
 	}
 	
 	@Test
