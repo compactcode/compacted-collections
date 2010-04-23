@@ -31,7 +31,7 @@ public class ParallelListStrategy implements ListStrategy {
 		try {
 			Function<T, Callable<O>> toCallable = toCallable(transform);
 			Function<Future<O>, O> fromFuture = fromFuture();
-			return fluent(executors.invokeAll(fluent(fromList).map(toCallable))).immediate().map(fromFuture);
+			return fluent(executors.invokeAll(fluent(fromList).map(toCallable))).map(fromFuture);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		} finally {
