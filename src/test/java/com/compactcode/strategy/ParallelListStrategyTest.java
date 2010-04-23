@@ -15,20 +15,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 
-public class ParallelTransformationStrategyTest {
+public class ParallelListStrategyTest {
 
 	private static final int SLEEP_TIME = 100;
-	
-	private Function<Integer, Integer> slowTransformation = new Function<Integer, Integer>() {
-		public Integer apply(Integer value) {
-			try {
-				Thread.sleep(SLEEP_TIME);
-			} catch (InterruptedException e) {
-				
-			}
-			return value;
-		}
-	};
 	
 	private Predicate<Integer> slowMatcher = new Predicate<Integer>() {
 		public boolean apply(Integer value) {
@@ -40,6 +29,7 @@ public class ParallelTransformationStrategyTest {
 			return true;
 		}
 	};
+	private Function<Integer, Boolean> slowTransformation = Functions.forPredicate(slowMatcher);
 
 	@Test
 	public void canTransformAInParallel() {
@@ -69,7 +59,6 @@ public class ParallelTransformationStrategyTest {
 	@Test
 	public void transformingInParallelIsFasterThanImmediateForSlowTransformations() {
 		final FluentList<Integer> source = fluent(1, 2, 3, 4, 5, 6);
-		
 		Runnable immediate = new Runnable() {
 			public void run() {
 				source.immediate().transform(slowTransformation);
@@ -80,21 +69,12 @@ public class ParallelTransformationStrategyTest {
 				source.parallel(6).transform(slowTransformation);
 			}
 		};
-		
-		long normalTime = measureExecutionTime(immediate);
-		long parallelTime = measureExecutionTime(parallel);
-		
-		System.out.println("normal transform time: " + normalTime + " ms");
-		System.out.println("parallel transform time: " + parallelTime + " ms");
-		
-		// Just check that there is a conservative, consistent improvment.
-		assertTrue(parallelTime < normalTime - 150);
+		assertSecondRunnableIsFasterBy(immediate, parallel, 150);
 	}
 	
 	@Test
 	public void filteringInParallelIsFasterThanImmediateForSlowMatchers() {
 		final FluentList<Integer> source = fluent(1, 2, 3, 4, 5, 6);
-		
 		Runnable immediate = new Runnable() {
 			public void run() {
 				source.immediate().filter(slowMatcher);
@@ -105,15 +85,14 @@ public class ParallelTransformationStrategyTest {
 				source.parallel(6).filter(slowMatcher);
 			}
 		};
+		assertSecondRunnableIsFasterBy(immediate, parallel, 150);
+	}
+
+	private void assertSecondRunnableIsFasterBy(Runnable slower, Runnable faster, int tolerance) {
+		long slowTime = measureExecutionTime(slower);
+		long fastTime = measureExecutionTime(faster);
 		
-		long normalTime = measureExecutionTime(immediate);
-		long parallelTime = measureExecutionTime(parallel);
-		
-		System.out.println("normal filter time: " + normalTime + " ms");
-		System.out.println("parallel filter time: " + parallelTime + " ms");
-		
-		// Just check that there is a conservative, consistent improvment.
-		assertTrue(parallelTime < normalTime - 150);
+		assertTrue(fastTime < slowTime - tolerance);
 	}
 	
 	private long measureExecutionTime(Runnable task) {

@@ -12,7 +12,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 
-public class LazyTransformationStrategyTest {
+public class LazyListStrategyTest {
 
 	@Test
 	public void canLazilyTransformAList() {
