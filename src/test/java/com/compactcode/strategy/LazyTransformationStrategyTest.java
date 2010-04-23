@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.compactcode.FluentList;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 
 public class LazyTransformationStrategyTest {
@@ -21,6 +22,21 @@ public class LazyTransformationStrategyTest {
 			}
 		};
 		FluentList.fluent("1", "2").lazy().transform(throwException);
+	}
+	
+	@Test
+	public void cannotLazilyFilterAList() {
+		Predicate<String> throwException = new Predicate<String>() {
+			public boolean apply(String value) {
+				throw new RuntimeException("not lazy");
+			}
+		};
+		try {
+			FluentList.fluent("1", "2").lazy().filter(throwException);
+			fail("lazy when not expected");
+		} catch (RuntimeException e) {
+			assertEquals("not lazy", e.getMessage());
+		}
 	}
 	
 	@Test

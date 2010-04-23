@@ -10,16 +10,19 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import com.google.common.base.Function;
+import com.google.common.base.Functions;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 /**
- * A transformation strategy that uses a {@link ThreadPoolExecutor} to transform items in parallel 
+ * A list strategy that uses a {@link ThreadPoolExecutor} to transform/filter items in parallel 
  * using a given number of threads. 
  */
-public class ParallelTransformationStrategy implements TransformationStrategy {
+public class ParallelListStrategy implements ListStrategy {
 
 	private final int numThreads;
 	
-	public ParallelTransformationStrategy(int numThreads) {
+	public ParallelListStrategy(int numThreads) {
 		this.numThreads = numThreads;
 	}
 
@@ -34,6 +37,17 @@ public class ParallelTransformationStrategy implements TransformationStrategy {
 		} finally {
 			executors.shutdown();
 		}
+	}
+	
+	public <T> List<T> filter(List<T> fromList, Predicate<? super T> predicate) {
+		List<Boolean> shouldInclude = transform(fromList, Functions.forPredicate(predicate));
+		List<T> filtered = Lists.newArrayList();
+		for (int i = 0; i < fromList.size(); i++) {
+			if(shouldInclude.get(i)) {
+				filtered.add(fromList.get(i));
+			}
+		}
+		return filtered;
 	}
 	
 	private <T, O> Function<T, Callable<O>> toCallable(final Function<? super T, O> transform) {

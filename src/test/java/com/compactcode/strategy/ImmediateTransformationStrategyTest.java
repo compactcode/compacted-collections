@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.compactcode.FluentList;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 public class ImmediateTransformationStrategyTest {
@@ -112,4 +113,18 @@ public class ImmediateTransformationStrategyTest {
 		}		
 	}
 	
+	@Test
+	public void canImmediatelyFilterAList() {
+		Predicate<String> throwException = new Predicate<String>() {
+			public boolean apply(String value) {
+				throw new RuntimeException("immediate");
+			}
+		};
+		try {
+			FluentList.fluent("1", "2").immediate().filter(throwException);
+			fail("not immediate");
+		} catch (RuntimeException e) {
+			assertEquals("immediate", e.getMessage());
+		}
+	}
 }

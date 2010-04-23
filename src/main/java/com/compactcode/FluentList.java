@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.hamcrest.Matcher;
 
-import com.compactcode.strategy.ImmediateTransformationStrategy;
-import com.compactcode.strategy.LazyTransformationStrategy;
-import com.compactcode.strategy.ParallelTransformationStrategy;
-import com.compactcode.strategy.TransformationStrategy;
+import com.compactcode.strategy.ImmediateListStrategy;
+import com.compactcode.strategy.LazyListStrategy;
+import com.compactcode.strategy.ParallelListStrategy;
+import com.compactcode.strategy.ListStrategy;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -42,7 +42,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Create a new fluent list that wraps the given list.
 	 */
 	public static <T> FluentList<T> fluent(List<T> delegate) {
-		return fluent(delegate, new ImmediateTransformationStrategy());
+		return fluent(delegate, new ImmediateListStrategy());
 	}
 	
 	/**
@@ -52,18 +52,18 @@ public class FluentList<T> extends ForwardingList<T> {
 		return fluent(Lists.newArrayList(delegate));
 	}
 	
-	private static <T> FluentList<T> fluent(List<T> delegate, TransformationStrategy strategy) {
+	private static <T> FluentList<T> fluent(List<T> delegate, ListStrategy strategy) {
 		return new FluentList<T>(delegate, strategy);
 	}
 	
-	private static <T> FluentList<T> fluent(Iterable<T> delegate, TransformationStrategy strategy) {
+	private static <T> FluentList<T> fluent(Iterable<T> delegate, ListStrategy strategy) {
 		return fluent(Lists.newArrayList(delegate), strategy);
 	}
 	
 	private final List<T> delegate;
-	private final TransformationStrategy strategy;
+	private final ListStrategy strategy;
 	
-	private FluentList(List<T> delegate, TransformationStrategy strategy) {
+	private FluentList(List<T> delegate, ListStrategy strategy) {
 		this.delegate = delegate;
 		this.strategy = strategy;
 	}
@@ -106,7 +106,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Find all matching elements in this list.
 	 */
 	public FluentList<T> filter(Predicate<? super T> predicate) {
-		return fluent(Iterables.filter(this, predicate), strategy);
+		return fluent(strategy.filter(this, predicate), strategy);
 	}
 	
 	/**
@@ -247,26 +247,26 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied using a {@link ImmediateTransformationStrategy}.
+	 * Subsequent transformations (map, transform) will be applied using a {@link ImmediateListStrategy}.
 	 * 
 	 * This is the default behaviour.
 	 */
 	public FluentList<T> immediate() {
-		return new FluentList<T>(this, new ImmediateTransformationStrategy());
+		return new FluentList<T>(this, new ImmediateListStrategy());
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied using a {@link LazyTransformationStrategy}.
+	 * Subsequent transformations (map, transform) will be applied using a {@link LazyListStrategy}.
 	 */
 	public FluentList<T> lazy() {
-		return new FluentList<T>(this, new LazyTransformationStrategy());
+		return new FluentList<T>(this, new LazyListStrategy());
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied using a {@link ParallelTransformationStrategy}.
+	 * Subsequent transformations (map, transform) will be applied using a {@link ParallelListStrategy}.
 	 */
 	public FluentList<T> parallel(int threads) {
-		return new FluentList<T>(this, new ParallelTransformationStrategy(threads));
+		return new FluentList<T>(this, new ParallelListStrategy(threads));
 	}
 
 	private <O >Predicate<O> asPredicate(final Matcher<? super O> matcher) {
