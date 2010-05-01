@@ -177,6 +177,46 @@ public class FluentListTest {
 	}
 	
 	@Test
+	public void canGetTheFirstNegativeTwoElementsFromAList() {
+		assertEquals(newArrayList("a", "b"), fluent("a", "b", "c").first(-2));
+	}
+	
+	@Test
+	public void canGetTheFirstTwoElementsFromAList() {
+		assertEquals(newArrayList("a", "b"), fluent("a", "b", "c").first(2));
+	}
+	
+	@Test
+	public void canGetTheLaztTwoElementsFromAnEmptyList() {
+		assertEquals(newArrayList(), fluent().last(2));
+	}
+	
+	@Test
+	public void canGetTheLastTwoElementsFromAListOfTwoElements() {
+		assertEquals(newArrayList("a", "b"), fluent("a", "b").last(2));
+	}
+	
+	@Test
+	public void canGetTheLastNegativeTwoElementsFromAList() {
+		assertEquals(newArrayList("b", "c"), fluent("a", "b", "c").last(-2));
+	}
+	
+	@Test
+	public void canGetTheLastTwoElementsFromAList() {
+		assertEquals(newArrayList("b", "c"), fluent("a", "b", "c").last(2));
+	}
+	
+	@Test
+	public void canGetTheFirstTwoElementsFromAnEmptyList() {
+		assertEquals(newArrayList(), fluent().first(2));
+	}
+	
+	@Test
+	public void canGetTheFirstTwoElementsFromAListOfTwoElements() {
+		assertEquals(newArrayList("a", "b"), fluent("a", "b").first(2));
+	}
+	
+	@Test
 	public void canGetTheLastElementFromAList() {
 		assertEquals("b", fluent("a", "b").last());
 	}

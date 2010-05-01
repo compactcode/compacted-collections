@@ -1,6 +1,7 @@
 package com.compactcode;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hamcrest.Matcher;
@@ -15,6 +16,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
@@ -219,6 +221,28 @@ public class FluentList<T> extends ForwardingList<T> {
 			return null;
 		}
 		return get(size() - 1);
+	}
+	
+	/**
+	 * Find the first n elements in this list, or return an empty list if no elements exist.
+	 */
+	public FluentList<T> first(int n) {
+		return first(n, iterator());
+	}
+
+	/**
+	 * Find the last n elements in this list, or return an empty list if no elements exist.
+	 */
+	public FluentList<T> last(int n) {
+		return first(n, reverse().iterator()).reverse();
+	}
+	
+	private FluentList<T> first(int n, Iterator<T> iterator) {
+		List<T> matched = Lists.newArrayList();
+		while (iterator.hasNext() && matched.size() < Math.abs(n)) {
+			matched.add(iterator.next());
+		}
+		return fluent(matched);
 	}
 	
 	/**
