@@ -136,6 +136,20 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 	
 	/**
+	 * Find all non matching elements in this list.
+	 */
+	public FluentList<T> reject(Predicate<? super T> predicate) {
+		return fluent(strategy.filter(this, Predicates.not(predicate)), strategy);
+	}
+	
+	/**
+	 * Find all non matching elements in this list.
+	 */
+	public FluentList<T> reject(Matcher<? super T> matcher) {
+		return reject(asPredicate(matcher));
+	}
+	
+	/**
 	 * Find the first matching element in this list, or return null.
 	 */
 	public T find(Predicate<? super T> predicate) {

@@ -107,6 +107,16 @@ public class FluentListTest {
 	}
 	
 	@Test
+	public void canRejectUsingPredicate() {
+		assertEquals(newArrayList("b", "c"), fluent("a", "b", "c").reject(equalTo("a")));
+	}
+	
+	@Test
+	public void canRejectUsingMatcher() {
+		assertEquals(newArrayList("b", "c"), fluent("a", "b", "c").reject(IsEqual.equalTo("a")));
+	}
+	
+	@Test
 	public void canFindFirstMatchingElementUsingPredicate() {
 		assertEquals("b", fluent("a", "b", "b").find(equalTo("b")));
 	}

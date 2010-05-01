@@ -1,6 +1,5 @@
 package com.compactcode.strategy;
 
-import static com.google.common.base.Predicates.alwaysTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
