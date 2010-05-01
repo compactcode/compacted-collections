@@ -139,7 +139,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Find all non matching elements in this list.
 	 */
 	public FluentList<T> reject(Predicate<? super T> predicate) {
-		return fluent(strategy.filter(this, Predicates.not(predicate)), strategy);
+		return filter(Predicates.not(predicate));
 	}
 	
 	/**
