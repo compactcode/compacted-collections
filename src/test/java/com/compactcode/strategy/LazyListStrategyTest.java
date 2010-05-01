@@ -1,5 +1,6 @@
 package com.compactcode.strategy;
 
+import static com.google.common.base.Predicates.alwaysTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -52,6 +53,22 @@ public class LazyListStrategyTest {
 		} catch (RuntimeException e) {
 			assertEquals("not lazy", e.getMessage());
 		}
+	}
+	
+	private Function<String, String> throwException = new Function<String, String>() {
+		public String apply(String element) {
+			throw new RuntimeException("not lazy");
+		}
+	};
+	
+	@Test
+	public void canFindFirstElementsAndLazilyTransformList() {
+		FluentList.fluent("1", "2").lazy().first(1).map(throwException);
+	}
+	
+	@Test
+	public void canFindLastElementsAndLazilyTransformList() {
+		FluentList.fluent("1", "2").lazy().last(1).map(throwException);
 	}
 	
 }

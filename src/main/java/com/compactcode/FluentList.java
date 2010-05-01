@@ -236,14 +236,6 @@ public class FluentList<T> extends ForwardingList<T> {
 		return first(n, Iterables.reverse(this).iterator()).reverse();
 	}
 	
-	private FluentList<T> first(int n, Iterator<T> iterator) {
-		List<T> matched = Lists.newArrayList();
-		while (iterator.hasNext() && matched.size() < Math.abs(n)) {
-			matched.add(iterator.next());
-		}
-		return fluent(matched);
-	}
-	
 	/**
 	 * Return a string created by concatenating each element seperated by the given seperator.
 	 */
@@ -263,10 +255,6 @@ public class FluentList<T> extends ForwardingList<T> {
 	 */
 	public FluentList<T> compact() {
 		return filter(Predicates.notNull());
-	}
-	
-	protected List<T> delegate() {
-		return delegate;
 	}
 
 	/**
@@ -292,6 +280,18 @@ public class FluentList<T> extends ForwardingList<T> {
 		return new FluentList<T>(this, new ParallelListStrategy(threads));
 	}
 
+	protected List<T> delegate() {
+		return delegate;
+	}
+	
+	private FluentList<T> first(int n, Iterator<T> iterator) {
+		List<T> matched = Lists.newArrayList();
+		while (iterator.hasNext() && matched.size() < Math.abs(n)) {
+			matched.add(iterator.next());
+		}
+		return fluent(matched, strategy);
+	}
+	
 	private <O >Predicate<O> asPredicate(final Matcher<? super O> matcher) {
 		return new Predicate<O>() {
 			public boolean apply(O element) {
