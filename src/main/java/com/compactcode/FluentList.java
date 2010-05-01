@@ -8,15 +8,14 @@ import org.hamcrest.Matcher;
 
 import com.compactcode.strategy.ImmediateListStrategy;
 import com.compactcode.strategy.LazyListStrategy;
-import com.compactcode.strategy.ParallelListStrategy;
 import com.compactcode.strategy.ListStrategy;
+import com.compactcode.strategy.ParallelListStrategy;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
@@ -234,7 +233,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Find the last n elements in this list, or return an empty list if no elements exist.
 	 */
 	public FluentList<T> last(int n) {
-		return first(n, reverse().iterator()).reverse();
+		return first(n, Iterables.reverse(this).iterator()).reverse();
 	}
 	
 	private FluentList<T> first(int n, Iterator<T> iterator) {
