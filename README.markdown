@@ -27,17 +27,21 @@ However, you can execute transformations lazily, or in parallel using multiple t
 A standard library of matchers are provided by the [Hamcrest](http://code.google.com/p/hamcrest/) project.
 
 	listOf(1, 2, 3).filter(greaterThan(1));
+	listOf(1, 2, 3).reject(lessThan(3));
 	listOf(1, 2).find(equalTo(1)); 
-	listOf(1, 2).first(); 
-	listOf(1, 2).last(); 
+	listOf(1, 2).first();
+	listOf(1, 2, 3).first(2); 
+	listOf(1, 2).last();
+	listOf(1, 2, 3).last(2); 
 	
 ### Sorting
 
-	listOf(1, 3, 2).sort(natural())
-	listOf(1, 2, 3).reverse()
+	listOf(1, 3, 2).sort(natural());
+	listOf(1, 2, 3).reverse();
 	
 ### Other
 
+    listOf("1", "2", "3").join(", ");
 	listOf("1", "2", "2").unique();
 	listOf("1", "2", null).compact();
 
