@@ -55,4 +55,4 @@ You can configure an eclipse project using Maven like so:
 
 ## Resources
 
-[JavaDocs](http://compactcode.github.com/compacted-collections/apidocs/2.2)
+[JavaDocs](http://compactcode.github.com/compacted-collections/apidocs/2.3)
