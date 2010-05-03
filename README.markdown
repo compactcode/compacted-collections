@@ -1,8 +1,18 @@
 # A sexier way to use google collections in your Java projects.
 
-I started with [Google Collections](http://code.google.com/p/google-collections/), got some inspiration from [Ruby](http://ruby-doc.org/core/classes/Array.html) and then whipped out the [Fluent Interface](http://en.wikipedia.org/wiki/Fluent_interface).
+compacted-collections brings the full power of object-oriented prgoramming to your Java collections.
 
-This project has been designed to be used in conjunction with the google collections api, not as a replacement.
+Modelled closely on the standard [Ruby](http://ruby-doc.org/core/classes/Array.html) library.
+
+Features:
+
+* [Fluent Interface](http://en.wikipedia.org/wiki/Fluent_interface)
+* Centralized Functionality
+
+Built on top of well known, high quality libraries:
+
+* [Google Collections](http://code.google.com/p/google-collections/)
+* [Hamcrest](http://code.google.com/p/hamcrest/)
 
 ## Usage
 
@@ -16,8 +26,6 @@ This project has been designed to be used in conjunction with the google collect
 	listOf("1", "2").map(toInt()).reduce(sum());
 	
 ### Filtering
-
-A standard library of matchers are provided by the [Hamcrest](http://code.google.com/p/hamcrest/) project.
 
 	listOf(1, 2, 3).filter(greaterThan(1));
 	listOf(1, 2, 3).reject(lessThan(3));
