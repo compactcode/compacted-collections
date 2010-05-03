@@ -22,8 +22,8 @@
 	</scm>
 	<distributionManagement>
 		<repository>
-			<id>local.repo</id>
-			<name>local repo for pushing to gh-pages</name>
+			<id>gh-pages</id>
+			<name>github gh-pages branch</name>
 			<url>file://${basedir}/mavenrepo</url>
 		</repository>
 	</distributionManagement>
