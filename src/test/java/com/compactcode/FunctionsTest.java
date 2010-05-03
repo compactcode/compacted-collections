@@ -1,6 +1,5 @@
 package com.compactcode;
 
-import static com.compactcode.FluentFunction.function;
 import static com.compactcode.FluentList.fluent;
 import static com.compactcode.Functions.each;
 import static com.compactcode.Functions.stringToInt;
@@ -16,8 +15,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import com.google.common.base.Function;
-import com.google.common.base.Functions;
-import com.google.common.base.Predicates;
 
 public class FunctionsTest {
 	
@@ -75,16 +72,6 @@ public class FunctionsTest {
 	@Test
 	public void canMapListsUsingMapAllFunction() {
 		assertEquals(newArrayList(1, 2), each(stringToInt()).apply(newArrayList("1", "2")));
-	}
-	
-	@Test
-	public void canComposeFunctionsFluently() {
-		assertEquals(Integer.valueOf(3), function(Functions.toStringFunction()).map(stringToInt()).apply(3));
-	}
-	
-	@Test
-	public void canComposePredicatesFromFunctionsFluently() {
-		assertEquals(true, function(stringToInt()).check(Predicates.<Integer>alwaysTrue()).apply("3"));
 	}
 	
 }
