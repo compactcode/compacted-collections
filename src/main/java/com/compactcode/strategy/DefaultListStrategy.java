@@ -12,7 +12,7 @@ import com.google.common.collect.Lists;
  * <p />
  * Delegates to {@link Iterables#filter(Iterable, Predicate)} for filtering.
  */
-public class ImmediateListStrategy implements ListStrategy {
+public class DefaultListStrategy implements ListStrategy {
 	public <T, O> List<O> transform(List<T> fromList, Function<? super T, O> function) {
 		return Lists.newArrayList(Iterables.transform(fromList, function));
 	}

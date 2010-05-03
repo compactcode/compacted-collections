@@ -15,13 +15,6 @@ This project has been designed to be used in conjunction with the google collect
 	listOf("1", "2").map(toInt());
 	listOf("1", "2").map(toInt()).reduce(sum());
 	
-By default transformations are performed immediately.
-
-However, you can execute transformations lazily, or in parallel using multiple threads.
-
-	listOf("1", "2").lazy().map(toInt());
-	listOf("1", "2").parallel(2).map(toInt());
-	
 ### Filtering
 
 A standard library of matchers are provided by the [Hamcrest](http://code.google.com/p/hamcrest/) project.

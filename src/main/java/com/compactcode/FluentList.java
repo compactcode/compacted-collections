@@ -6,8 +6,7 @@ import java.util.List;
 
 import org.hamcrest.Matcher;
 
-import com.compactcode.strategy.ImmediateListStrategy;
-import com.compactcode.strategy.LazyListStrategy;
+import com.compactcode.strategy.DefaultListStrategy;
 import com.compactcode.strategy.ListStrategy;
 import com.compactcode.strategy.ParallelListStrategy;
 import com.google.common.base.Function;
@@ -43,7 +42,7 @@ public class FluentList<T> extends ForwardingList<T> {
 	 * Create a new fluent list that wraps the given list.
 	 */
 	public static <T> FluentList<T> fluent(List<T> delegate) {
-		return fluent(delegate, new ImmediateListStrategy());
+		return fluent(delegate, new DefaultListStrategy());
 	}
 	
 	/**
@@ -272,19 +271,12 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied using a {@link ImmediateListStrategy}.
+	 * Subsequent transformations (map, transform) will be applied using a {@link DefaultListStrategy}.
 	 * 
 	 * This is the default behaviour.
 	 */
 	public FluentList<T> immediate() {
-		return new FluentList<T>(this, new ImmediateListStrategy());
-	}
-
-	/**
-	 * Subsequent transformations (map, transform) will be applied using a {@link LazyListStrategy}.
-	 */
-	public FluentList<T> lazy() {
-		return new FluentList<T>(this, new LazyListStrategy());
+		return new FluentList<T>(this, new DefaultListStrategy());
 	}
 
 	/**
