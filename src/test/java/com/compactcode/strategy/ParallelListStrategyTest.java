@@ -61,7 +61,7 @@ public class ParallelListStrategyTest {
 		final FluentList<Integer> source = fluent(1, 2, 3, 4, 5, 6);
 		Runnable immediate = new Runnable() {
 			public void run() {
-				source.immediate().transform(slowTransformation);
+				source.serial().transform(slowTransformation);
 			}
 		};
 		Runnable parallel = new Runnable() {
@@ -77,7 +77,7 @@ public class ParallelListStrategyTest {
 		final FluentList<Integer> source = fluent(1, 2, 3, 4, 5, 6);
 		Runnable immediate = new Runnable() {
 			public void run() {
-				source.immediate().filter(slowMatcher);
+				source.serial().filter(slowMatcher);
 			}
 		};
 		Runnable parallel = new Runnable() {

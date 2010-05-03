@@ -271,16 +271,16 @@ public class FluentList<T> extends ForwardingList<T> {
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied using a {@link DefaultListStrategy}.
+	 * Subsequent transformations (map, transform) will be applied serially using a {@link DefaultListStrategy}.
 	 * 
 	 * This is the default behaviour.
 	 */
-	public FluentList<T> immediate() {
+	public FluentList<T> serial() {
 		return new FluentList<T>(this, new DefaultListStrategy());
 	}
 
 	/**
-	 * Subsequent transformations (map, transform) will be applied using a {@link ParallelListStrategy}.
+	 * Subsequent transformations (map, transform) will be applied in parallel using a {@link ParallelListStrategy}.
 	 */
 	public FluentList<T> parallel(int threads) {
 		return new FluentList<T>(this, new ParallelListStrategy(threads));

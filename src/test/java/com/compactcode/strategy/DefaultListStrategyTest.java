@@ -14,7 +14,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-public class ImmediateListStrategyTest {
+public class DefaultListStrategyTest {
 
 	Function<String, String> throwException = new Function<String, String>() {
 		public String apply(String value) {
@@ -26,7 +26,7 @@ public class ImmediateListStrategyTest {
 	public void canImmediatelyTransformAList() {
 		FluentList.fluent(1, 2, null).compact();
 		try {
-			FluentList.fluent("1", "2").immediate().transform(throwException);
+			FluentList.fluent("1", "2").serial().transform(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -36,7 +36,7 @@ public class ImmediateListStrategyTest {
 	@Test
 	public void canImmediatelyTransformAListTwice() {
 		try {
-			FluentList.fluent("1", "2").immediate().map(toStringFunction()).map(throwException);
+			FluentList.fluent("1", "2").serial().map(toStringFunction()).map(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -51,7 +51,7 @@ public class ImmediateListStrategyTest {
 			}
 		};
 		try {
-			FluentList.fluent("1", "2").immediate().expand(throwException);
+			FluentList.fluent("1", "2").serial().expand(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -66,7 +66,7 @@ public class ImmediateListStrategyTest {
 			}
 		};
 		try {
-			FluentList.fluent("1", "2").immediate().expand(expander).map(throwException);
+			FluentList.fluent("1", "2").serial().expand(expander).map(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -76,7 +76,7 @@ public class ImmediateListStrategyTest {
 	@Test
 	public void canFilterAndImmediatelyTransformAList() {
 		try {
-			FluentList.fluent("1", "2").immediate().filter(alwaysTrue()).map(throwException);
+			FluentList.fluent("1", "2").serial().filter(alwaysTrue()).map(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -86,7 +86,7 @@ public class ImmediateListStrategyTest {
 	@Test
 	public void canSortAndImmediatelyTransformAList() {
 		try {
-			FluentList.fluent("1", "2").immediate().sort().map(throwException);
+			FluentList.fluent("1", "2").serial().sort().map(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -96,7 +96,7 @@ public class ImmediateListStrategyTest {
 	@Test
 	public void canReverseAndImmediatelyTransformAList() {
 		try {
-			FluentList.fluent("1", "2").immediate().reverse().map(throwException);
+			FluentList.fluent("1", "2").serial().reverse().map(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -106,7 +106,7 @@ public class ImmediateListStrategyTest {
 	@Test
 	public void canCompactAndImmediatelyTransformAList() {
 		try {
-			FluentList.fluent("1", "2", null).immediate().unique().map(throwException);
+			FluentList.fluent("1", "2", null).serial().unique().map(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
@@ -121,7 +121,7 @@ public class ImmediateListStrategyTest {
 			}
 		};
 		try {
-			FluentList.fluent("1", "2").immediate().filter(throwException);
+			FluentList.fluent("1", "2").serial().filter(throwException);
 			fail("not immediate");
 		} catch (RuntimeException e) {
 			assertEquals("immediate", e.getMessage());
