@@ -7,7 +7,7 @@ Modelled closely on the standard [Ruby](http://ruby-doc.org/core/classes/Array.h
 Features:
 
 * [Fluent Interface](http://en.wikipedia.org/wiki/Fluent_interface)
-* Centralized Functionality
+* [Facade Pattern](http://en.wikipedia.org/wiki/Facade_pattern)
 
 Built on top of well known, high quality libraries:
 
