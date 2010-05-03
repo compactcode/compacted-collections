@@ -5,10 +5,28 @@
 	<groupId>com.compactcode</groupId>
 	<artifactId>compacted-collections</artifactId>
 	<packaging>jar</packaging>
-	<version>2.3</version>
+	<version>2.3-SNAPSHOT</version>
 	<name>Compacted Collections</name>
-	<description>Bringing Ruby style collections to java. Built on top of the google collections api.</description>
-	<url>http://compactcode.com/</url>
+	<description>Ruby style collections in java.</description>
+	<url>http://github.com/compactcode/compacted-collections</url>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git://github.com/compactcode/compacted-collections.git</connection>
+		<url>scm:git://github.com/compactcode/compacted-collections.git</url>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>local.repo</id>
+			<name>local repo for pushing to gh-pages</name>
+			<url>file://${basedir}/mavenrepo</url>
+		</repository>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.collections</groupId>
@@ -58,19 +76,19 @@
 			</plugin>
 		</plugins>
 	</build>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <links>
-            <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
-            <link>http://google-collections.googlecode.com/svn/trunk/javadoc/</link>
-            <link>http://kentbeck.github.com/junit/javadoc/4.8.1/</link>
-          </links>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<links>
+						<link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+						<link>http://google-collections.googlecode.com/svn/trunk/javadoc/</link>
+						<link>http://kentbeck.github.com/junit/javadoc/4.8.1/</link>
+					</links>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
