@@ -5,7 +5,7 @@
 	<groupId>com.compactcode</groupId>
 	<artifactId>compacted-collections</artifactId>
 	<packaging>jar</packaging>
-	<version>2.3-SNAPSHOT</version>
+	<version>2.4-SNAPSHOT</version>
 	<name>Compacted Collections</name>
 	<description>Ruby style collections in java.</description>
 	<url>http://github.com/compactcode/compacted-collections</url>
