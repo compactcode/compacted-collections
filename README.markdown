@@ -42,9 +42,24 @@ A standard library of matchers are provided by the [Hamcrest](http://code.google
 
 This project is built using [Apache Maven](http://maven.apache.org/).
 
-You can configure an eclipse project using Maven like so:
+You can easily add it to any maven enabled project like so:
 
-	mvn eclipse:eclipse
+	...
+	<repositories>
+		<repository>
+			<id>compacted-collections</id>
+			<url>http://compactcode.github.com/compacted-collections/mavenrepo</url>
+		</repository>
+	</repositories>
+	...
+	<dependencies>
+		<dependency>
+			<groupId>com.compactcode</groupId>
+			<artifactId>compacted-collections</artifactId>
+			<version>2.4</version>
+		</dependency>
+	</dependencies>
+	...
 
 ## Resources
 
