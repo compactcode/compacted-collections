@@ -1,6 +1,6 @@
 # A sexier way to use google collections in your Java projects.
 
-compacted-collections brings the full power of object-oriented prgoramming to your Java collections.
+compacted-collections brings the full power of object-oriented programming to your Java collections.
 
 Modelled closely on the standard [Ruby](http://ruby-doc.org/core/classes/Array.html) library.
 
