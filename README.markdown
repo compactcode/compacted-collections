@@ -64,7 +64,7 @@ You can easily add it to any maven enabled project like so:
 		<dependency>
 			<groupId>com.compactcode</groupId>
 			<artifactId>compacted-collections</artifactId>
-			<version>2.4</version>
+			<version>2.5</version>
 		</dependency>
 	</dependencies>
 	...
