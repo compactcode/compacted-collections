@@ -68,3 +68,7 @@ You can easily add it to any maven enabled project like so:
 		</dependency>
 	</dependencies>
 	...
+	
+## Examples
+
+If you'd like to see some compacted collections in action, check out the [example project](http://github.com/compactcode/compacted-examples).
