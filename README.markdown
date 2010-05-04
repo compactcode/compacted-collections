@@ -68,7 +68,3 @@ You can easily add it to any maven enabled project like so:
 		</dependency>
 	</dependencies>
 	...
-
-## Resources
-
-[JavaDocs](http://compactcode.github.com/compacted-collections/apidocs/2.4)
