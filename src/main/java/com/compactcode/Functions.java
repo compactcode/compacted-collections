@@ -9,6 +9,7 @@ import java.util.List;
 import org.hamcrest.beans.HasPropertyWithValue;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Ordering;
 
 /**
  * A collection of useful functions.
@@ -90,6 +91,28 @@ public final class Functions {
 					total += value;
 				}
 				return total;
+			}
+		};
+	}
+	
+	/**
+	 * Calculates the min value in a collection of integers.
+	 */
+	public static final Function<Collection<Integer>, Integer> min() {
+		return new Function<Collection<Integer>, Integer>() {
+			public Integer apply(Collection<Integer> values) {
+				return fluent(values).compact().sort(Ordering.natural()).first();
+			}
+		};
+	}
+	
+	/**
+	 * Calculates the max value in a collection of integers.
+	 */
+	public static final Function<Collection<Integer>, Integer> max() {
+		return new Function<Collection<Integer>, Integer>() {
+			public Integer apply(Collection<Integer> values) {
+				return fluent(values).compact().sort(Ordering.natural()).last();
 			}
 		};
 	}

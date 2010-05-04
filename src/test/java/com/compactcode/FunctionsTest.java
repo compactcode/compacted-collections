@@ -2,6 +2,8 @@ package com.compactcode;
 
 import static com.compactcode.FluentList.fluent;
 import static com.compactcode.Functions.each;
+import static com.compactcode.Functions.max;
+import static com.compactcode.Functions.min;
 import static com.compactcode.Functions.stringToInt;
 import static com.compactcode.Functions.stringToLong;
 import static com.compactcode.Functions.sum;
@@ -11,6 +13,8 @@ import static com.compactcode.Functions.toPropertyValue;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -67,6 +71,38 @@ public class FunctionsTest {
 	@Test
 	public void canSumIntegers() {
 		assertEquals(Integer.valueOf(6), fluent(newArrayList(1, 2, 3)).reduce(sum()));
+	}
+	
+	@Test
+	public void canFindMinInteger() {
+		assertEquals(Integer.valueOf(1), fluent(newArrayList(1, 2, 3)).reduce(min()));
+	}
+	
+	@Test
+	public void canFindMinIntegerWithNulls() {
+		assertEquals(Integer.valueOf(1), fluent(newArrayList(1, 2, null, 3)).reduce(min()));
+	}
+	
+	@Test
+	public void canFindMinIntegerReturnsNullForEmptyList() {
+		ArrayList<Integer> source = newArrayList();
+		assertEquals(null, fluent(source).reduce(min()));
+	}
+	
+	@Test
+	public void canFindMaxInteger() {
+		assertEquals(Integer.valueOf(3), fluent(newArrayList(1, 2, 3)).reduce(max()));
+	}
+	
+	@Test
+	public void canFindMaxIntegerWithNulls() {
+		assertEquals(Integer.valueOf(3), fluent(newArrayList(1, 2, null, 3)).reduce(max()));
+	}
+	
+	@Test
+	public void canFindMaxIntegerReturnsNullForEmptyList() {
+		ArrayList<Integer> source = newArrayList();
+		assertEquals(null, fluent(source).reduce(max()));
 	}
 	
 	@Test
